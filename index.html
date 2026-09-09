@@ -1,1434 +1,803 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>The Universe I Made Only For U</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --night: #100d25;
-      --night2: #1b1434;
-      --pink: #eeb7d2;
-      --pink-light: #f9dce9;
-      --cream: #fff7ef;
-      --gold: #e8c98c;
-      --wrong: #ff8eae;
-      --correct: #cce8d3;
-    }
-
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-    }
-
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at 50% 20%, #40315b 0%, transparent 30%),
-        radial-gradient(circle at 80% 70%, #291b47 0%, transparent 32%),
-        linear-gradient(160deg, #0c0a1c, #18112f 55%, #0b0918);
-      color: var(--cream);
-      font-family: "Cormorant Garamond", serif;
-    }
-
-    button,
-    input {
-      font-family: inherit;
-    }
-
-    /* =========================
-       STAR FIELD
-    ========================= */
-
-    .stars {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: white;
-      opacity: .65;
-      animation: twinkle 3s infinite ease-in-out;
-    }
-
-    .star:nth-child(1)  { left: 8%;  top: 15%; animation-delay: .2s; }
-    .star:nth-child(2)  { left: 18%; top: 34%; animation-delay: 1s; }
-    .star:nth-child(3)  { left: 27%; top: 12%; animation-delay: 1.7s; }
-    .star:nth-child(4)  { left: 37%; top: 27%; animation-delay: .5s; }
-    .star:nth-child(5)  { left: 48%; top: 9%;  animation-delay: 2s; }
-    .star:nth-child(6)  { left: 59%; top: 18%; animation-delay: .8s; }
-    .star:nth-child(7)  { left: 72%; top: 11%; animation-delay: 1.4s; }
-    .star:nth-child(8)  { left: 84%; top: 29%; animation-delay: .3s; }
-    .star:nth-child(9)  { left: 91%; top: 17%; animation-delay: 1.8s; }
-    .star:nth-child(10) { left: 13%; top: 68%; animation-delay: 2.2s; }
-    .star:nth-child(11) { left: 25%; top: 82%; animation-delay: .9s; }
-    .star:nth-child(12) { left: 41%; top: 72%; animation-delay: 1.2s; }
-    .star:nth-child(13) { left: 65%; top: 78%; animation-delay: .6s; }
-    .star:nth-child(14) { left: 79%; top: 62%; animation-delay: 1.6s; }
-    .star:nth-child(15) { left: 94%; top: 81%; animation-delay: 2.4s; }
-
-    @keyframes twinkle {
-      0%, 100% {
-        transform: scale(.6);
-        opacity: .25;
-      }
-
-      50% {
-        transform: scale(1.7);
-        opacity: 1;
-      }
-    }
-
-    /* =========================
-       GENERAL
-    ========================= */
-
-    .scene {
-      position: relative;
-      z-index: 5;
-      min-height: 100vh;
-      width: 100%;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .scene.active {
-      display: flex;
-    }
-
-    .content {
-      width: min(760px, 100%);
-      text-align: center;
-    }
-
-    /* =========================
-       SCENE 1
-    ========================= */
-
-    #scene1 .content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .moon {
-      position: relative;
-      width: 145px;
-      height: 145px;
-      margin-bottom: 38px;
-      border-radius: 50%;
-      background:
-        radial-gradient(
-          circle at 35% 30%,
-          #fffdf6 0%,
-          #fff1d2 45%,
-          #e5c78d 100%
-        );
-      box-shadow:
-        0 0 25px rgba(255,239,190,.55),
-        0 0 80px rgba(255,229,163,.2);
-      animation: moonFloat 6s ease-in-out infinite;
-    }
-
-    .moon::before,
-    .moon::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(185,148,107,.13);
-    }
-
-    .moon::before {
-      width: 25px;
-      height: 25px;
-      top: 35px;
-      left: 30px;
-    }
-
-    .moon::after {
-      width: 18px;
-      height: 18px;
-      bottom: 32px;
-      right: 28px;
-    }
-
-    @keyframes moonFloat {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .ribbon {
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      width: 30px;
-      height: 75px;
-      background: var(--pink);
-      transform: translateX(-50%);
-      z-index: 3;
-    }
-
-    .ribbon::before,
-    .ribbon::after {
-      content: "";
-      position: absolute;
-      top: 50px;
-      width: 35px;
-      height: 60px;
-      background: var(--pink);
-    }
-
-    .ribbon::before {
-      left: -28px;
-      transform: rotate(-30deg);
-      clip-path: polygon(
-        0 0,
-        100% 18%,
-        65% 100%,
-        45% 72%
-      );
-    }
-
-    .ribbon::after {
-      right: -28px;
-      transform: rotate(30deg);
-      clip-path: polygon(
-        0 18%,
-        100% 0,
-        55% 72%,
-        35% 100%
-      );
-    }
-
-    .small-title {
-      font-size: 15px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-      animation: fadeUp 1.2s ease both;
-    }
-
-    .title {
-      font-family: "Parisienne", cursive;
-      font-size: clamp(48px, 9vw, 90px);
-      line-height: 1;
-      color: var(--pink-light);
-      text-shadow:
-        0 0 20px rgba(238,183,210,.25),
-        0 0 50px rgba(238,183,210,.12);
-      animation: fadeUp 1.4s ease .2s both;
-    }
-
-    .subtitle {
-      margin-top: 22px;
-      max-width: 550px;
-      font-size: clamp(18px, 3vw, 23px);
-      line-height: 1.6;
-      color: rgba(255,247,239,.88);
-      animation: fadeUp 1.4s ease .5s both;
-    }
-
-    .enter-button {
-      margin-top: 38px;
-      padding: 15px 30px;
-      border: 1px solid rgba(255,247,239,.45);
-      border-radius: 999px;
-      background: rgba(255,255,255,.07);
-      color: var(--cream);
-      font-size: 18px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: .3s ease;
-      animation: fadeUp 1.4s ease .8s both;
-    }
-
-    .enter-button:hover {
-      transform: translateY(-4px) scale(1.03);
-      background: rgba(238,183,210,.16);
-      box-shadow: 0 10px 35px rgba(238,183,210,.18);
-    }
-
-    .hint {
-      margin-top: 18px;
-      font-size: 13px;
-      letter-spacing: 2px;
-      color: rgba(255,247,239,.45);
-      animation: fadeUp 1.4s ease 1s both;
-    }
-
-    /* =========================
-       SCENE 2
-    ========================= */
-
-    #scene2 {
-      padding-top: 60px;
-      padding-bottom: 60px;
-    }
-
-    .chapter {
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .scene-title {
-      font-family: "Parisienne", cursive;
-      font-size: clamp(42px, 8vw, 72px);
-      color: var(--pink-light);
-      line-height: 1.05;
-      margin-bottom: 18px;
-      text-shadow: 0 0 30px rgba(238,183,210,.15);
-    }
-
-    .scene-text {
-      font-size: 20px;
-      line-height: 1.55;
-      color: rgba(255,247,239,.88);
-      margin-bottom: 12px;
-    }
-
-    .tease {
-      margin: 8px auto 26px;
-      max-width: 500px;
-      font-size: 16px;
-      line-height: 1.6;
-      color: rgba(255,247,239,.65);
-    }
-
-    .tease strong {
-      display: block;
-      color: var(--pink-light);
-      font-size: 20px;
-      letter-spacing: 2px;
-      margin-top: 3px;
-    }
-
-    /* =========================
-       SUDOKU
-    ========================= */
-
-    .sudoku-wrapper {
-      display: flex;
-      justify-content: center;
-      margin: 25px auto;
-    }
-
-    .sudoku {
-      width: min(560px, 94vw);
-      aspect-ratio: 1;
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      border: 3px solid rgba(255,247,239,.8);
-      background: rgba(255,255,255,.06);
-      box-shadow:
-        0 0 35px rgba(238,183,210,.10),
-        0 20px 70px rgba(0,0,0,.25);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .cell {
-      position: relative;
-      min-width: 0;
-      min-height: 0;
-      border-right: 1px solid rgba(255,247,239,.20);
-      border-bottom: 1px solid rgba(255,247,239,.20);
-      background: rgba(255,255,255,.025);
-    }
-
-    .cell:nth-child(9n) {
-      border-right: none;
-    }
-
-    .cell:nth-child(n+73) {
-      border-bottom: none;
-    }
-
-    /* Strong 3x3 borders */
-    .cell:nth-child(3n) {
-      border-right: 2px solid rgba(255,247,239,.55);
-    }
-
-    .cell:nth-child(9n) {
-      border-right: none;
-    }
-
-    .cell:nth-child(n+19):nth-child(-n+27),
-    .cell:nth-child(n+46):nth-child(-n+54) {
-      border-bottom: 2px solid rgba(255,247,239,.55);
-    }
-
-    .cell input {
-      width: 100%;
-      height: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      text-align: center;
-      color: var(--pink-light);
-      font-size: clamp(18px, 4vw, 29px);
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .cell.given {
-      background: rgba(255,247,239,.055);
-    }
-
-    .cell.given input {
-      color: var(--cream);
-      font-weight: 600;
-      cursor: default;
-    }
-
-    .cell:not(.given):hover {
-      background: rgba(238,183,210,.12);
-    }
-
-    .cell.selected {
-      background: rgba(238,183,210,.18);
-      box-shadow: inset 0 0 0 2px rgba(249,220,233,.35);
-    }
-
-    .cell.wrong {
-      background: rgba(255,142,174,.20);
-      animation: shake .25s ease;
-    }
-
-    .cell.correct {
-      background: rgba(204,232,211,.12);
-    }
-
-    @keyframes shake {
-      0%, 100% {
-        transform: translateX(0);
-      }
-
-      25% {
-        transform: translateX(-4px);
-      }
-
-      75% {
-        transform: translateX(4px);
-      }
-    }
-
-    .sudoku-note {
-      margin-top: 15px;
-      color: rgba(255,247,239,.55);
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
-
-    .game-message {
-      min-height: 30px;
-      margin-top: 18px;
-      color: var(--pink-light);
-      font-size: 18px;
-      transition: .3s ease;
-    }
-
-    .game-message.error {
-      color: var(--wrong);
-    }
-
-    .game-message.success {
-      color: var(--correct);
-      font-size: 22px;
-    }
-
-    .clear-button {
-      margin-top: 15px;
-      padding: 9px 20px;
-      border: 1px solid rgba(255,247,239,.25);
-      border-radius: 999px;
-      background: rgba(255,255,255,.05);
-      color: rgba(255,247,239,.75);
-      cursor: pointer;
-      transition: .25s ease;
-    }
-
-    .clear-button:hover {
-      background: rgba(255,255,255,.1);
-    }
-
-    /* =========================
-       ACCESS
-    ========================= */
-
-    .access-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background:
-        radial-gradient(circle at center, rgba(73,52,100,.8), rgba(8,6,18,.98));
-      opacity: 0;
-    }
-
-    .access-overlay.show {
-      display: flex;
-      animation: overlayIn 1.2s ease forwards;
-    }
-
-    .access-content {
-      padding: 30px;
-    }
-
-    .access-symbol {
-      font-size: 60px;
-      margin-bottom: 20px;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .access-title {
-      font-family: "Parisienne", cursive;
-      font-size: clamp(48px, 9vw, 80px);
-      color: var(--pink-light);
-    }
-
-    .access-text {
-      margin-top: 15px;
-      font-size: 20px;
-      color: rgba(255,247,239,.8);
-    }
-
-    @keyframes overlayIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.12);
-      }
-    }
-
-    /* =========================
-       FADE
-    ========================= */
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(22px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-
-    /* =========================
-       SCENE 3 · ROACH QUESTION
-    ========================= */
-
-    #scene3 {
-      padding-top: 55px;
-      padding-bottom: 55px;
-    }
-
-    .roach-question {
-      margin-top: 10px;
-      margin-bottom: 22px;
-      font-size: clamp(27px, 5vw, 42px);
-      line-height: 1.25;
-      color: var(--pink-light);
-      font-weight: 500;
-      text-shadow: 0 0 25px rgba(238,183,210,.12);
-    }
-
-    .roach-card {
-      display: flex;
-      justify-content: center;
-      margin: 20px auto 28px;
-    }
-
-    .roach-image {
-      display: block;
-      width: min(300px, 72vw);
-      height: auto;
-      border-radius: 18px;
-      border: 2px solid rgba(255,247,239,.35);
-      box-shadow:
-        0 15px 40px rgba(0,0,0,.38),
-        0 0 35px rgba(238,183,210,.12);
-    }
-
-    .roach-answers {
-      position: relative;
-      width: min(620px, 94vw);
-      min-height: 110px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      touch-action: manipulation;
-    }
-
-    .answer-button {
-      padding: 14px 24px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,247,239,.35);
-      background: rgba(255,255,255,.07);
-      color: var(--cream);
-      font-size: 18px;
-      cursor: pointer;
-      transition: transform .25s ease, background .25s ease;
-      backdrop-filter: blur(8px);
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-
-    .answer-button:hover {
-      transform: translateY(-3px) scale(1.03);
-      background: rgba(238,183,210,.16);
-    }
-
-    .yes-answer {
-      border-color: rgba(204,232,211,.55);
-    }
-
-    .no-answer {
-      border-color: rgba(255,142,174,.55);
-      z-index: 2;
-    }
-
-    .no-answer.running {
-      position: absolute;
-      transition: left .16s ease, top .16s ease;
-    }
-
-    #roachMessage {
-      min-height: 58px;
-      max-width: 650px;
-      margin: 16px auto 0;
-      line-height: 1.5;
-    }
-
-    .roach-next {
-      display: none;
-      margin-top: 12px;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 600px) {
-
-      #scene2 {
-        padding-top: 35px;
-      }
-
-      .moon {
-        width: 110px;
-        height: 110px;
-      }
-
-      .small-title {
-        font-size: 11px;
-        letter-spacing: 3px;
-      }
-
-      .scene-text {
-        font-size: 18px;
-      }
-
-      .sudoku {
-        width: min(94vw, 430px);
-      }
-
-      .cell input {
-        font-size: clamp(15px, 5vw, 24px);
-      }
-
-      .scene-title {
-        font-size: clamp(40px, 13vw, 60px);
-      }
-
-      #scene3 {
-        padding-top: 35px;
-      }
-
-      .roach-image {
-        width: min(260px, 72vw);
-      }
-
-      .roach-question {
-        font-size: clamp(25px, 7vw, 34px);
-      }
-
-      .answer-button {
-        font-size: 16px;
-        padding: 12px 20px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Universe I Made Only for U</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(245,220,255,.18), transparent 28%),
+    radial-gradient(circle at 20% 80%, rgba(255,180,210,.10), transparent 25%),
+    linear-gradient(160deg, #17112e 0%, #21163d 48%, #0d0b20 100%);
+  color: #fff8ff;
+  font-family: "Quicksand", sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .75;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.85) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(255,214,239,.7) 0 1px, transparent 1.5px);
+  background-size: 110px 110px, 170px 170px;
+  background-position: 15px 20px, 70px 90px;
+  animation: stars 10s linear infinite;
+}
+
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-35px); }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.scene {
+  position: relative;
+  min-height: 100vh;
+  padding: 55px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: min(900px, 94vw);
+  padding: 48px 34px 44px;
+  text-align: center;
+  border: 1px solid rgba(255,225,244,.24);
+  border-radius: 30px;
+  background: rgba(31, 20, 58, .68);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  animation: appear .8s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+  color: #eac8df;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+h1, h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(42px, 7vw, 72px);
+  line-height: .98;
+}
+
+h2 {
+  font-size: clamp(34px, 6vw, 54px);
+  line-height: 1;
+}
+
+.subtitle {
+  margin: 20px auto 30px;
+  max-width: 650px;
+  color: #eaddec;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+button {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.main-btn,
+.answer-btn,
+.skip-btn {
+  padding: 14px 25px;
+  border-radius: 999px;
+  color: #321a39;
+  background: linear-gradient(135deg, #ffe3ef, #f4c5db);
+  box-shadow: 0 10px 30px rgba(255,185,215,.16);
+  font-weight: 700;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.main-btn:hover,
+.answer-btn:hover,
+.skip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(255,185,215,.25);
+}
+
+.moon {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: #fff4d9;
+  box-shadow:
+    0 0 35px rgba(255,239,190,.65),
+    0 0 90px rgba(255,214,239,.18);
+  position: relative;
+}
+
+.moon::after {
+  content: "";
+  position: absolute;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  top: -8px;
+  left: 28px;
+  background: #21163d;
+}
+
+.sudoku-wrap {
+  margin: 30px auto 0;
+  width: min(500px, 92vw);
+}
+
+.timer {
+  margin-bottom: 14px;
+  color: #f9d7e9;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sudoku {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  aspect-ratio: 1;
+  width: 100%;
+  margin: auto;
+  border: 2px solid rgba(255,236,248,.7);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,.06);
+}
+
+.cell {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid rgba(255,255,255,.25);
+  border-bottom: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.04);
+  color: #fff8ff;
+  font-size: clamp(16px, 4vw, 25px);
+  font-weight: 600;
+  outline: none;
+  text-align: center;
+}
+
+.cell:nth-child(9n) {
+  border-right: 0;
+}
+
+.cell:nth-last-child(-n+9) {
+  border-bottom: 0;
+}
+
+.cell.given {
+  background: rgba(255,226,242,.14);
+  color: #ffe8f3;
+  cursor: default;
+}
+
+.cell:not(.given) {
+  cursor: text;
+}
+
+.cell:focus {
+  background: rgba(255,191,218,.13);
+  box-shadow: inset 0 0 0 2px rgba(255,207,229,.5);
+}
+
+.cell.wrong {
+  background: rgba(255,142,174,.20);
+  animation: shake .25s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* đường 3x3 */
+.cell:nth-child(3n) {
+  border-right: 2px solid rgba(255,236,248,.58);
+}
+
+.cell:nth-child(9n) {
+  border-right: 0;
+}
+
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 2px solid rgba(255,236,248,.58);
+}
+
+.message {
+  min-height: 30px;
+  margin-top: 18px;
+  color: #ffd9e9;
+  font-weight: 700;
+}
+
+.skip-area {
+  margin-top: 25px;
+}
+
+.skip-question {
+  margin-bottom: 14px;
+  color: #ffe6f0;
+  font-weight: 700;
+}
+
+.skip-btn {
+  background: linear-gradient(135deg, #eec8ff, #ffd0e4);
+}
+
+.access-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(9,5,23,.82);
+  backdrop-filter: blur(10px);
+}
+
+.access-box {
+  width: min(520px, 92vw);
+  padding: 38px 28px;
+  border: 1px solid rgba(255,230,245,.25);
+  border-radius: 26px;
+  text-align: center;
+  background: #21163d;
+  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+
+.access-box p {
+  color: #ecddeb;
+  line-height: 1.7;
+}
+
+.roach-img {
+  display: block;
+  width: min(250px, 62vw);
+  max-height: 240px;
+  object-fit: contain;
+  margin: 8px auto 25px;
+  filter: drop-shadow(0 15px 20px rgba(0,0,0,.3));
+}
+
+.roach-question {
+  margin-top: 10px;
+  color: #ffe3ee;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.roach-answers {
+  position: relative;
+  width: min(620px, 94vw);
+  min-height: 110px;
+  margin: 48px auto 0;
+  padding-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.answer-btn {
+  min-width: 210px;
+}
+
+.yes-answer {
+  position: relative;
+  z-index: 2;
+}
+
+.no-answer {
+  position: relative;
+  z-index: 3;
+  transition: left .16s ease, top .16s ease;
+}
+
+.no-answer.running {
+  position: fixed;
+  z-index: 9999;
+}
+
+.roach-message {
+  min-height: 30px;
+  margin-top: 20px;
+  color: #ffd8e8;
+  font-weight: 700;
+}
+
+.small-note {
+  margin-top: 18px;
+  color: rgba(255,245,252,.62);
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .scene {
+    padding: 30px 12px;
+  }
+
+  .card {
+    padding: 34px 18px 35px;
+    border-radius: 24px;
+  }
+
+  .moon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .moon::after {
+    width: 86px;
+    height: 86px;
+    left: 24px;
+  }
+
+  .roach-answers {
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .answer-btn {
+    min-width: 0;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
+</style>
 </head>
 
 <body>
-  
+
+<!-- SCENE 1 -->
+<section id="scene1" class="scene">
+  <div class="card">
+    <div class="moon"></div>
+    <div class="eyebrow">A little universe made only for you</div>
+    <h1>The Universe I Made Only for U</h1>
+    <p class="subtitle">
+      Ơ kìa... Hình như em bé của anh muốn gửi điều gì đó đến anh đấy.
+    </p>
+    <button class="main-btn" onclick="enterUniverse()">
+      ♡ Enter my little universe
+    </button>
+  </div>
+</section>
+
+<!-- SCENE 2 -->
+<section id="scene2" class="scene hidden">
+  <div class="card">
+    <div class="eyebrow">Planet 01 · The Gate</div>
+    <h2>Can You Get Through?</h2>
+    <p class="subtitle">
+      Mỗi vũ trụ đều có một cánh cổng.<br>
+      Và mỗi cánh cổng đều cần một người đủ kiên nhẫn để mở nó. ♡
+    </p>
+
+    <div class="sudoku-wrap">
+      <div id="timer" class="timer">Bỏ qua sau: 30s</div>
+      <div id="sudoku" class="sudoku"></div>
+      <div id="message" class="message"></div>
+
+      <div id="skipArea" class="skip-area hidden">
+        <div class="skip-question">Anh có muốn bỏ qua không? 🥺</div>
+        <button class="skip-btn" onclick="skipSudoku()">♡ Skip Sudoku</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 3 -->
+<section id="scene3" class="scene hidden">
+  <div class="card">
+    <div class="eyebrow">Planet 02 · A Very Important Question</div>
+    <h2>Nếu em biến thành con gián...</h2>
+
+    <p class="subtitle">
+      Anh sẽ vẫn yêu em chứ?
+    </p>
+
+    <img class="roach-img" src="roach.png" alt="Một chú gián đáng yêu">
+
+    <div class="roach-question">Anh có yêu em không? 🪳</div>
+
+    <div class="roach-answers" id="roachAnswers">
+      <button class="answer-btn yes-answer" onclick="chooseYes()">
+        Có, anh vẫn yêu em 🥺
+      </button>
+
+      <button
+        class="answer-btn no-answer"
+        id="noAnswer"
+        type="button"
+        onmouseenter="handleNoMouseEnter(event)"
+        onpointerdown="handleNoPointerDown(event)"
+        onclick="return false;"
+      >
+        Không 😭
+      </button>
+    </div>
+
+    <div id="roachMessage" class="roach-message"></div>
+    <div class="small-note">♡ Chọn câu trả lời thật lòng nhé.</div>
+  </div>
+</section>
+
+<!-- ACCESS OVERLAY -->
+<div id="accessOverlay" class="access-overlay hidden">
+  <div class="access-box">
+    <div class="eyebrow">Gate unlocked ♡</div>
+    <h2>Cánh cổng đã mở rồi.</h2>
+    <p>
+      Ngoan. Anh đã đi qua được cánh cổng đầu tiên của vũ trụ này.
+    </p>
+    <button class="main-btn" onclick="goToScene3()">
+      Continue ♡
+    </button>
+  </div>
+</div>
+
 <audio id="bgm" loop>
   <source src="bgm.mp3" type="audio/mpeg">
 </audio>
 
-  <audio id="buzz">
+<audio id="buzz">
   <source src="Wrong Buzzer.mp3" type="audio/mpeg">
 </audio>
-  
-  <!-- =========================
-       STARS
-  ========================= -->
 
-  <div class="stars">
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-    <span class="star"></span>
-  </div>
-
-
-  <!-- =========================
-       SCENE 1
-  ========================= -->
-
-  <main class="scene active" id="scene1">
-
-    <div class="content">
-
-      <div class="moon">
-        <div class="ribbon"></div>
-      </div>
-
-      <div class="small-title">
-        A Little Invitation
-      </div>
-
-      <h1 class="title">
-        The Universe<br>
-        I Made Only For U
-      </h1>
-
-      <p class="subtitle">
-        Ơ kìa...<br>
-        Hình như em bé của anh muốn gửi<br>
-        điều gì đó đến anh đấy.
-      </p>
-
-      <button
-        class="enter-button"
-        onclick="enterUniverse()"
-      >
-        ♡ &nbsp; Enter my little universe
-      </button>
-
-      <div class="hint">
-        made with love, just for you
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- =========================
-       SCENE 2
-  ========================= -->
-
-  <main class="scene" id="scene2">
-
-    <div class="content">
-
-      <div class="chapter">
-        Planet 01 · The Gate
-      </div>
-
-      <h2 class="scene-title">
-        Can You Get Through?
-      </h2>
-
-    <p class="scene-text">
-    <em>Mỗi vũ trụ đều có một cánh cổng.</em><br>
-    <em>Và mỗi cánh cổng đều cần một người đủ kiên nhẫn để mở nó. ♡</em>
-</p>
-
-      <div class="sudoku-wrapper">
-        <div class="sudoku" id="sudoku"></div>
-      </div>
-
-      <div
-        class="game-message"
-        id="gameMessage"
-      >
-        Một cánh cổng nhỏ đang chờ anh mở...
-      </div>
-
-      <button
-        class="clear-button"
-        onclick="clearSelected()"
-      >
-        Clear selected cell
-      </button>
-
-    </div>
-
-  </main>
-
-
-
-  <!-- =========================
-       SCENE 3
-  ========================= -->
-
-  <main class="scene" id="scene3">
-
-    <div class="content">
-
-      <div class="chapter">
-        Planet 02 · The Question
-      </div>
-
-      <h2 class="scene-title">
-        Anh có yêu em không?
-      </h2>
-
-      <p class="scene-text">
-        Nếu một ngày em biến thành con gián...
-      </p>
-
-      <div class="roach-card">
-        <img
-          src="roach.png"
-          alt="Một con gián"
-          class="roach-image"
-        >
-      </div>
-
-      <h3 class="roach-question">
-        Anh có còn yêu em không? 🪳
-      </h3>
-
-      <div class="roach-answers" id="roachAnswers">
-
-        <button
-          class="answer-button yes-answer"
-          onclick="roachYes()"
-        >
-          Có, anh vẫn yêu em 🥺
-        </button>
-
-        <button
-          class="answer-button no-answer"
-          id="noButton"
-          type="button"
-        >
-          Không 😭
-        </button>
-
-      </div>
-
-      <div
-        class="game-message"
-        id="roachMessage"
-      ></div>
-
-    </div>
-
-  </main>
-
-
-  <!-- =========================
-       ACCESS OVERLAY
-  ========================= -->
-
-  <div
-    class="access-overlay"
-    id="accessOverlay"
-  >
-
-    <div class="access-content">
-
-      <div class="access-symbol">
-        🌙
-      </div>
-
-      <div class="access-title">
-        Access Granted
-      </div>
-
-      <div class="access-text">
-        Welcome to the universe I made only for you. ♡
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <script>
-
-    /* =====================================
-       SCENE CONTROL
-    ===================================== */
-
-    function enterUniverse() {
-
-      const bgm = document.getElementById("bgm");
-bgm.play();
-      
-      const scene1 = document.getElementById("scene1");
-      const scene2 = document.getElementById("scene2");
-
-      scene1.style.opacity = "0";
-      scene1.style.transition = "opacity 1s ease";
-
-      setTimeout(() => {
-
-        scene1.classList.remove("active");
-        scene2.classList.add("active");
-
-        window.scrollTo({
-          top: 0,
-          behavior: "instant"
-        });
-
-        scene2.style.opacity = "0";
-
-        requestAnimationFrame(() => {
-
-          scene2.style.transition = "opacity 1s ease";
-
-          requestAnimationFrame(() => {
-            scene2.style.opacity = "1";
-          });
-
-        });
-
-      }, 1000);
-    }
-
-
-    /* =====================================
-       SUDOKU
-    ===================================== */
-
-    const solution = [
-
-      [4,3,5,2,6,9,7,8,1],
-      [6,8,2,5,7,1,4,9,3],
-      [1,9,7,8,3,4,5,6,2],
-
-      [8,2,6,1,9,5,3,4,7],
-      [3,7,4,6,8,2,9,1,5],
-      [9,5,1,7,4,3,6,2,8],
-
-      [5,1,9,3,2,6,8,7,4],
-      [2,4,8,9,5,7,1,3,6],
-      [7,6,3,4,1,8,2,5,9]
-
-    ];
-
-
-    /*
-      1 = given / locked
-      0 = empty / player must fill
-    */
-
-    const puzzle = [
-
-      [1,0,1,1,0,1,1,0,0],
-      [1,1,0,0,1,0,1,1,0],
-      [1,1,0,0,0,1,1,0,0],
-
-      [1,1,0,1,0,1,0,1,0],
-      [0,0,1,1,0,1,1,0,0],
-      [0,1,0,0,0,1,0,1,1],
-
-      [1,0,1,1,0,0,0,1,1],
-      [0,1,0,0,1,0,0,1,1],
-      [1,0,1,0,1,1,0,0,0]
-
-    ];
-
-
-    let selectedCell = null;
-    let completed = false;
-
-
-    /* =====================================
-       BUILD BOARD
-    ===================================== */
-
-    function buildSudoku() {
-
-      const board = document.getElementById("sudoku");
-
-      board.innerHTML = "";
-
-      for (let row = 0; row < 9; row++) {
-
-        for (let col = 0; col < 9; col++) {
-
-          const cell = document.createElement("div");
-
-          cell.className = "cell";
-
-          const input = document.createElement("input");
-
-          input.type = "text";
-          input.inputMode = "numeric";
-          input.maxLength = 1;
-          input.autocomplete = "off";
-
-          input.dataset.row = row;
-          input.dataset.col = col;
-
-          /* GIVEN */
-
-          if (puzzle[row][col] === 1) {
-
-            cell.classList.add("given");
-
-            input.value = solution[row][col];
-
-            input.readOnly = true;
-
-          }
-
-          /* PLAYER CELL */
-
-          else {
-
-          input.addEventListener("focus", () => {
-
-  selectedCell = input;
-
-  document.querySelectorAll(".cell")
-    .forEach(c => c.classList.remove("selected"));
-
-  cell.classList.add("selected");
-
-  input.select();
-
-});
-            input.addEventListener("input", () => {
-
-              const value = input.value;
-
-              /* Only numbers 1-9 */
-
-              if (!/^[1-9]$/.test(value)) {
-
-                input.value = "";
-
-                return;
-
-              }
-
-              checkCell(input, cell);
-
-            });
-
-
-            input.addEventListener("keydown", event => {
-
-              if (
-                event.key === "Backspace" ||
-                event.key === "Delete"
-              ) {
-
-                input.value = "";
-
-                cell.classList.remove(
-                  "wrong",
-                  "correct"
-                );
-
-              }
-
-            });
-
-          }
-
-          cell.appendChild(input);
-
-          board.appendChild(cell);
-
-        }
-
-      }
-
-    }
-
-
-    /* =====================================
-       CHECK INDIVIDUAL CELL
-    ===================================== */
-
-    const wrongMessages = [
+<script>
+/* =========================
+   GLOBAL
+========================= */
+
+let timerInterval = null;
+let timeLeft = 30;
+let sudokuFinished = false;
+
+const solution = [
+  [4,3,5,2,6,9,7,8,1],
+  [6,8,2,5,7,1,4,9,3],
+  [1,9,7,8,3,4,5,6,2],
+  [8,2,6,1,9,5,3,4,7],
+  [3,7,4,6,8,2,9,1,5],
+  [9,5,1,7,4,3,6,2,8],
+  [5,1,9,3,2,6,8,7,4],
+  [2,4,8,9,5,7,1,3,6],
+  [7,6,3,4,1,8,2,5,9]
+];
+
+const puzzle = [
+  [1,0,1,1,0,1,1,0,0],
+  [1,1,0,0,1,0,1,1,0],
+  [1,1,0,0,0,1,1,0,0],
+  [1,1,0,1,0,1,0,1,0],
+  [0,0,1,1,0,1,1,0,0],
+  [0,1,0,0,0,1,0,1,1],
+  [1,0,1,1,0,0,0,1,1],
+  [0,1,0,0,1,0,0,1,1],
+  [1,0,1,0,1,1,0,0,0]
+];
+
+const wrongMessages = [
   "EO ƠI GÀAAA 🐔",
   "Anh có chắc anh học giỏi Toán?",
   "Sai rồi kìa, chồng em ơiii liu liu",
   "Hmm... em nghĩ anh làm được tốt hơn đó",
   "Đến số còn tính sai, sao có thể tính được chuyện đôi mình? 😠"
 ];
-    
-    function checkCell(input, cell) {
 
-      const row = Number(input.dataset.row);
-      const col = Number(input.dataset.col);
+/* =========================
+   SCENE 1
+========================= */
 
-      const value = Number(input.value);
+function enterUniverse() {
+  document.getElementById("scene1").classList.add("hidden");
+  document.getElementById("scene2").classList.remove("hidden");
 
-      cell.classList.remove(
-        "wrong",
-        "correct"
-      );
+  const bgm = document.getElementById("bgm");
+  bgm.volume = 0.45;
+  bgm.play().catch(() => {});
 
+  buildSudoku();
+  startTimer();
+}
 
-      if (value === solution[row][col]) {
+/* =========================
+   SUDOKU
+========================= */
 
-        cell.classList.add("correct");
+function buildSudoku() {
+  const board = document.getElementById("sudoku");
+  board.innerHTML = "";
 
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      const cell = document.createElement("input");
+
+      cell.className = "cell";
+      cell.type = "text";
+      cell.inputMode = "numeric";
+      cell.maxLength = 1;
+      cell.autocomplete = "off";
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+
+      if (puzzle[r][c] === 1) {
+        cell.value = solution[r][c];
+        cell.classList.add("given");
+        cell.readOnly = true;
+      } else {
+        cell.addEventListener("input", function() {
+          handleSudokuInput(cell);
+        });
+
+        cell.addEventListener("keydown", function(e) {
+          if (
+            e.key !== "Backspace" &&
+            e.key !== "Delete" &&
+            e.key !== "Tab" &&
+            !/^[1-9]$/.test(e.key)
+          ) {
+            e.preventDefault();
+          }
+        });
       }
 
-      else {
+      board.appendChild(cell);
+    }
+  }
+}
 
-        cell.classList.remove("wrong");
-        void cell.offsetWidth;
-        cell.classList.add("wrong");
+function handleSudokuInput(cell) {
+  if (sudokuFinished) return;
 
-        if (navigator.vibrate) {
-          navigator.vibrate(200);
-}        
-        
-const buzz = document.getElementById("buzz");
+  const value = cell.value.trim();
 
-buzz.currentTime = 2;
-buzz.play();
+  if (value === "") {
+    cell.classList.remove("wrong");
+    document.getElementById("message").textContent = "";
+    return;
+  }
 
-setTimeout(() => {
-  buzz.pause();
-}, 600);
-        
-  showMessage(
-    wrongMessages[Math.floor(Math.random() * wrongMessages.length)],
-    true
+  if (!/^[1-9]$/.test(value)) {
+    cell.value = "";
+    return;
+  }
+
+  const r = Number(cell.dataset.row);
+  const c = Number(cell.dataset.col);
+
+  if (Number(value) !== solution[r][c]) {
+    cell.classList.remove("wrong");
+    void cell.offsetWidth;
+    cell.classList.add("wrong");
+
+    if (navigator.vibrate) {
+      navigator.vibrate(200);
+    }
+
+    const buzz = document.getElementById("buzz");
+    buzz.currentTime = 2;
+    buzz.play().catch(() => {});
+
+    setTimeout(() => {
+      buzz.pause();
+    }, 600);
+
+    showMessage(
+      wrongMessages[Math.floor(Math.random() * wrongMessages.length)],
+      true
+    );
+
+    cell.value = "";
+    return;
+  }
+
+  cell.classList.remove("wrong");
+  showMessage("", false);
+
+  checkSudokuComplete();
+}
+
+function showMessage(text, isWrong) {
+  const message = document.getElementById("message");
+  message.textContent = text || "";
+  message.style.color = isWrong ? "#ffabc5" : "#ffd9e9";
+}
+
+function checkSudokuComplete() {
+  const editableCells = document.querySelectorAll(".cell:not(.given)");
+
+  for (const cell of editableCells) {
+    const r = Number(cell.dataset.row);
+    const c = Number(cell.dataset.col);
+
+    if (Number(cell.value) !== solution[r][c]) {
+      return;
+    }
+  }
+
+  sudokuFinished = true;
+  clearInterval(timerInterval);
+
+  document.getElementById("timer").textContent = "Cánh cổng đã mở ♡";
+  document.getElementById("skipArea").classList.add("hidden");
+
+  setTimeout(() => {
+    document.getElementById("accessOverlay").classList.remove("hidden");
+  }, 350);
+}
+
+/* =========================
+   TIMER / SKIP
+========================= */
+
+function startTimer() {
+  clearInterval(timerInterval);
+
+  timeLeft = 30;
+  document.getElementById("timer").textContent = "Bỏ qua sau: 30s";
+
+  timerInterval = setInterval(() => {
+    if (sudokuFinished) {
+      clearInterval(timerInterval);
+      return;
+    }
+
+    timeLeft--;
+
+    if (timeLeft > 0) {
+      document.getElementById("timer").textContent =
+        "Bỏ qua sau: " + timeLeft + "s";
+    } else {
+      clearInterval(timerInterval);
+
+      document.getElementById("timer").textContent = "Bỏ qua sau: 0s";
+      document.getElementById("skipArea").classList.remove("hidden");
+    }
+  }, 1000);
+}
+
+function skipSudoku() {
+  clearInterval(timerInterval);
+
+  document.getElementById("skipArea").classList.add("hidden");
+
+  document.getElementById("message").textContent =
+    "Không giải được thì chạy đi mách em chứ, sao lại chọn bỏ cuộc vậy? Nhưng thôi... ai bảo em thương anh. ♡";
+
+  setTimeout(() => {
+    goToScene3();
+  }, 2200);
+}
+
+/* =========================
+   SCENE 3
+========================= */
+
+function goToScene3() {
+  clearInterval(timerInterval);
+
+  document.getElementById("accessOverlay").classList.add("hidden");
+  document.getElementById("scene2").classList.add("hidden");
+  document.getElementById("scene3").classList.remove("hidden");
+
+  resetNoButton();
+}
+
+function chooseYes() {
+  document.getElementById("roachMessage").textContent =
+    "Aww, em cũng yêu anh. 🥺♡";
+}
+
+/* =========================
+   FLEEING "KHÔNG" BUTTON
+========================= */
+
+const noButton = document.getElementById("noAnswer");
+
+function handleNoMouseEnter(e) {
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+  moveNoButton();
+}
+
+function handleNoPointerDown(e) {
+  // Never allow the "Không" button to receive an actual click.
+  e.preventDefault();
+  e.stopPropagation();
+  moveNoButton();
+}
+
+document.addEventListener("pointermove", function(e) {
+  if (
+    document.getElementById("scene3").classList.contains("hidden") ||
+    window.matchMedia("(pointer: coarse)").matches
+  ) {
+    return;
+  }
+
+  const rect = noButton.getBoundingClientRect();
+
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  const distance = Math.hypot(
+    e.clientX - centerX,
+    e.clientY - centerY
   );
 
-      }
-
-
-      checkComplete();
-
-    }
-
-
-    /* =====================================
-       CHECK COMPLETE
-    ===================================== */
-
-    function checkComplete() {
-
-      if (completed) return;
-
-      const inputs =
-        document.querySelectorAll(
-          "#sudoku .cell:not(.given) input"
-        );
-
-
-      for (const input of inputs) {
-
-        const row =
-          Number(input.dataset.row);
-
-        const col =
-          Number(input.dataset.col);
-
-        const value =
-          Number(input.value);
-
-
-        if (
-          !value ||
-          value !== solution[row][col]
-        ) {
-
-          return;
-
-        }
-
-      }
-
-
-      completed = true;
-
-      showMessage(
-        "Anh mở được cánh cổng rồi... ♡",
-        false
-      );
-
-      setTimeout(() => {
-
-        const overlay = document.getElementById("accessOverlay");
-        overlay.classList.add("show");
-
-        setTimeout(() => {
-          goToScene3();
-        }, 1800);
-
-      }, 700);
-
-    }
-
-
-
-    /* =====================================
-       SCENE 3 · ROACH QUESTION
-    ===================================== */
-
-    function goToScene3() {
-
-      const overlay = document.getElementById("accessOverlay");
-      const scene2 = document.getElementById("scene2");
-      const scene3 = document.getElementById("scene3");
-
-      overlay.classList.remove("show");
-      overlay.style.display = "none";
-      overlay.style.opacity = "0";
-
-      scene2.style.opacity = "0";
-      scene2.style.transition = "opacity .8s ease";
-
-      setTimeout(() => {
-
-        scene2.classList.remove("active");
-        scene3.classList.add("active");
-
-        window.scrollTo({
-          top: 0,
-          behavior: "instant"
-        });
-
-        scene3.style.opacity = "0";
-        scene3.style.transition = "opacity 1s ease";
-
-        requestAnimationFrame(() => {
-          scene3.style.opacity = "1";
-        });
-
-      }, 800);
-    }
-
-
-    function roachYes() {
-
-      const message = document.getElementById("roachMessage");
-
-      message.textContent =
-        "Ngoan. Biết ngay anh không nỡ bỏ em mà. 🥺♡";
-
-      message.classList.remove("error");
-      message.classList.add("success");
-
-    }
-
-
-    function moveNoButton() {
-
-      const button = document.getElementById("noButton");
-      const area = document.getElementById("roachAnswers");
-
-      if (!button || !area) return;
-
-      button.classList.add("running");
-
-      const padding = 6;
-      const maxX = Math.max(
-        padding,
-        area.clientWidth - button.offsetWidth - padding
-      );
-
-      const maxY = Math.max(
-        padding,
-        area.clientHeight - button.offsetHeight - padding
-      );
-
-      const x = padding + Math.random() * Math.max(0, maxX - padding);
-      const y = padding + Math.random() * Math.max(0, maxY - padding);
-
-      button.style.left = `${x}px`;
-      button.style.top = `${y}px`;
-    }
-
-
-    /* 🖥️ Desktop:
-       Chỉ chạy khi chuột thật sự tiến lại gần nút.
-       Khi chuột đi xa, nút đứng im. */
-
-    document.addEventListener("mousemove", (event) => {
-
-      const button = document.getElementById("noButton");
-
-      if (!button || window.innerWidth <= 768) return;
-
-      const rect = button.getBoundingClientRect();
-
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const distance = Math.hypot(
-        event.clientX - centerX,
-        event.clientY - centerY
-      );
-
-      if (distance < 110) {
-        moveNoButton();
-      }
-
-    });
-
-
-    /* 📱 Mobile:
-       Chạm vào nút là nó giật sang chỗ khác. */
-
-    document.addEventListener("pointerdown", (event) => {
-
-      const button = document.getElementById("noButton");
-
-      if (!button) return;
-      if (event.pointerType === "mouse") return;
-
-      if (event.target === button) {
-
-        event.preventDefault();
-        moveNoButton();
-
-      }
-
-    });
-
-
-    /* =====================================
-       MESSAGE
-    ===================================== */
-
-    function showMessage(text, error) {
-
-      const message =
-        document.getElementById("gameMessage");
-
-      message.textContent = text;
-
-      message.classList.toggle(
-        "error",
-        error
-      );
-
-      message.classList.toggle(
-        "success",
-        !error
-      );
-
-    }
-
-
-    /* =====================================
-       CLEAR SELECTED
-    ===================================== */
-
-    function clearSelected() {
-
-      if (!selectedCell) return;
-
-      if (
-        selectedCell.closest(".cell")
-          .classList.contains("given")
-      ) {
-
-        return;
-
-      }
-
-      selectedCell.value = "";
-
-      selectedCell
-        .closest(".cell")
-        .classList.remove(
-          "wrong",
-          "correct"
-        );
-
-    }
-
-
-    /* =====================================
-       START
-    ===================================== */
-
-    buildSudoku();
-
-  </script>
+  // Start running before the cursor can actually reach it.
+  if (distance < 110) {
+    moveNoButton();
+  }
+});
+
+function moveNoButton() {
+  const rect = noButton.getBoundingClientRect();
+
+  const padding = 12;
+  const maxX = Math.max(
+    padding,
+    window.innerWidth - rect.width - padding
+  );
+  const maxY = Math.max(
+    padding,
+    window.innerHeight - rect.height - padding
+  );
+
+  const x = padding + Math.random() * Math.max(0, maxX - padding);
+  const y = padding + Math.random() * Math.max(0, maxY - padding);
+
+  noButton.classList.add("running");
+  noButton.style.left = x + "px";
+  noButton.style.top = y + "px";
+}
+
+
+</script>
 
 </body>
 </html>
