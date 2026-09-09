@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>The Universe I Made Only for U</title>
+  <title>The Universe I Made Only For U</title>
 
-  <!-- Romantic fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
@@ -20,41 +19,56 @@
 
     :root {
       --night: #100d25;
-      --night-light: #21183d;
+      --night2: #1b1434;
       --pink: #eeb7d2;
       --pink-light: #f9dce9;
       --cream: #fff7ef;
       --gold: #e8c98c;
-      --white: #fffafc;
+      --wrong: #ff8eae;
+      --correct: #cce8d3;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
     }
 
     body {
       min-height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
       background:
-        radial-gradient(circle at 50% 25%, #41315d 0%, transparent 28%),
-        radial-gradient(circle at 80% 70%, #291b47 0%, transparent 30%),
+        radial-gradient(circle at 50% 20%, #40315b 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, #291b47 0%, transparent 32%),
         linear-gradient(160deg, #0c0a1c, #18112f 55%, #0b0918);
       color: var(--cream);
       font-family: "Cormorant Garamond", serif;
     }
 
-    /* ---------- STAR FIELD ---------- */
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    /* =========================
+       STAR FIELD
+    ========================= */
 
     .stars {
       position: fixed;
       inset: 0;
       overflow: hidden;
       pointer-events: none;
+      z-index: 0;
     }
 
     .star {
       position: absolute;
       width: 3px;
       height: 3px;
-      background: white;
       border-radius: 50%;
-      opacity: 0.65;
+      background: white;
+      opacity: .65;
       animation: twinkle 3s infinite ease-in-out;
     }
 
@@ -86,95 +100,38 @@
       }
     }
 
-    /* ---------- FLOATING DUST ---------- */
-
-    .dust {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .dust span {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: var(--pink-light);
-      border-radius: 50%;
-      opacity: .25;
-      animation: floatDust 9s linear infinite;
-    }
-
-    .dust span:nth-child(1) { left: 15%; animation-delay: 0s; }
-    .dust span:nth-child(2) { left: 35%; animation-delay: 3s; }
-    .dust span:nth-child(3) { left: 55%; animation-delay: 6s; }
-    .dust span:nth-child(4) { left: 75%; animation-delay: 2s; }
-    .dust span:nth-child(5) { left: 90%; animation-delay: 5s; }
-
-    @keyframes floatDust {
-      from {
-        transform: translateY(105vh);
-      }
-
-      to {
-        transform: translateY(-10vh);
-      }
-    }
-
-    /* ---------- MAIN ---------- */
+    /* =========================
+       GENERAL
+    ========================= */
 
     .scene {
       position: relative;
       z-index: 5;
       min-height: 100vh;
       width: 100%;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
-      padding: 30px;
-      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .scene.active {
+      display: flex;
     }
 
     .content {
-      width: min(720px, 100%);
+      width: min(760px, 100%);
+      text-align: center;
+    }
+
+    /* =========================
+       SCENE 1
+    ========================= */
+
+    #scene1 .content {
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .small-title {
-      font-size: 15px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 1.4s ease forwards;
-      animation-delay: .5s;
-    }
-
-    .title {
-      font-family: "Parisienne", cursive;
-      font-size: clamp(48px, 9vw, 90px);
-      line-height: 1;
-      color: var(--pink-light);
-      text-shadow:
-        0 0 20px rgba(238,183,210,.25),
-        0 0 50px rgba(238,183,210,.12);
-      opacity: 0;
-      animation: fadeUp 1.5s ease forwards;
-      animation-delay: .9s;
-    }
-
-    .subtitle {
-      margin-top: 22px;
-      max-width: 550px;
-      font-size: clamp(18px, 3vw, 23px);
-      line-height: 1.6;
-      color: rgba(255,247,239,.88);
-      opacity: 0;
-      animation: fadeUp 1.5s ease forwards;
-      animation-delay: 1.5s;
     }
 
     .moon {
@@ -184,14 +141,16 @@
       margin-bottom: 38px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 35% 30%, #fffdf6 0%, #fff1d2 45%, #e5c78d 100%);
+        radial-gradient(
+          circle at 35% 30%,
+          #fffdf6 0%,
+          #fff1d2 45%,
+          #e5c78d 100%
+        );
       box-shadow:
         0 0 25px rgba(255,239,190,.55),
         0 0 80px rgba(255,229,163,.2);
-      opacity: 0;
-      animation:
-        moonAppear 1.8s ease forwards,
-        moonFloat 6s ease-in-out 2s infinite;
+      animation: moonFloat 6s ease-in-out infinite;
     }
 
     .moon::before,
@@ -216,18 +175,6 @@
       right: 28px;
     }
 
-    @keyframes moonAppear {
-      from {
-        opacity: 0;
-        transform: scale(.65);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
     @keyframes moonFloat {
       0%, 100% {
         transform: translateY(0);
@@ -238,63 +185,91 @@
       }
     }
 
-    /* ---------- RIBBON ---------- */
-
     .ribbon {
       position: absolute;
       top: -18px;
       left: 50%;
-      width: 38px;
-      height: 80px;
+      width: 30px;
+      height: 75px;
       background: var(--pink);
-      transform: translateX(-50%) rotate(3deg);
-      box-shadow: 0 5px 20px rgba(0,0,0,.15);
+      transform: translateX(-50%);
+      z-index: 3;
     }
 
     .ribbon::before,
     .ribbon::after {
       content: "";
       position: absolute;
-      top: 55px;
-      width: 34px;
-      height: 50px;
+      top: 50px;
+      width: 35px;
+      height: 60px;
       background: var(--pink);
     }
 
     .ribbon::before {
-      left: -27px;
-      transform: rotate(-28deg);
-      clip-path: polygon(0 0, 100% 20%, 65% 100%, 45% 72%);
+      left: -28px;
+      transform: rotate(-30deg);
+      clip-path: polygon(
+        0 0,
+        100% 18%,
+        65% 100%,
+        45% 72%
+      );
     }
 
     .ribbon::after {
-      right: -27px;
-      transform: rotate(28deg);
-      clip-path: polygon(0 20%, 100% 0, 55% 72%, 35% 100%);
+      right: -28px;
+      transform: rotate(30deg);
+      clip-path: polygon(
+        0 18%,
+        100% 0,
+        55% 72%,
+        35% 100%
+      );
     }
 
-    /* ---------- BUTTON ---------- */
+    .small-title {
+      font-size: 15px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .title {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(48px, 9vw, 90px);
+      line-height: 1;
+      color: var(--pink-light);
+      text-shadow:
+        0 0 20px rgba(238,183,210,.25),
+        0 0 50px rgba(238,183,210,.12);
+      animation: fadeUp 1.4s ease .2s both;
+    }
+
+    .subtitle {
+      margin-top: 22px;
+      max-width: 550px;
+      font-size: clamp(18px, 3vw, 23px);
+      line-height: 1.6;
+      color: rgba(255,247,239,.88);
+      animation: fadeUp 1.4s ease .5s both;
+    }
 
     .enter-button {
-      position: relative;
       margin-top: 38px;
       padding: 15px 30px;
       border: 1px solid rgba(255,247,239,.45);
       border-radius: 999px;
       background: rgba(255,255,255,.07);
       color: var(--cream);
-      font-family: inherit;
       font-size: 18px;
       letter-spacing: 1px;
       cursor: pointer;
       backdrop-filter: blur(8px);
-      transition:
-        transform .3s ease,
-        background .3s ease,
-        box-shadow .3s ease;
-      opacity: 0;
-      animation: fadeUp 1.5s ease forwards;
-      animation-delay: 2.2s;
+      transition: .3s ease;
+      animation: fadeUp 1.4s ease .8s both;
     }
 
     .enter-button:hover {
@@ -303,28 +278,284 @@
       box-shadow: 0 10px 35px rgba(238,183,210,.18);
     }
 
-    .enter-button:active {
-      transform: scale(.97);
-    }
-
-    /* ---------- FOOTER ---------- */
-
     .hint {
       margin-top: 18px;
       font-size: 13px;
       letter-spacing: 2px;
       color: rgba(255,247,239,.45);
-      opacity: 0;
-      animation: fadeUp 1.5s ease forwards;
-      animation-delay: 2.7s;
+      animation: fadeUp 1.4s ease 1s both;
     }
 
-    /* ---------- ANIMATION ---------- */
+    /* =========================
+       SCENE 2
+    ========================= */
+
+    #scene2 {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .chapter {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .scene-title {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(42px, 8vw, 72px);
+      color: var(--pink-light);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      text-shadow: 0 0 30px rgba(238,183,210,.15);
+    }
+
+    .scene-text {
+      font-size: 20px;
+      line-height: 1.55;
+      color: rgba(255,247,239,.88);
+      margin-bottom: 12px;
+    }
+
+    .tease {
+      margin: 8px auto 26px;
+      max-width: 500px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255,247,239,.65);
+    }
+
+    .tease strong {
+      display: block;
+      color: var(--pink-light);
+      font-size: 20px;
+      letter-spacing: 2px;
+      margin-top: 3px;
+    }
+
+    /* =========================
+       SUDOKU
+    ========================= */
+
+    .sudoku-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 25px auto;
+    }
+
+    .sudoku {
+      width: min(560px, 94vw);
+      aspect-ratio: 1;
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      border: 3px solid rgba(255,247,239,.8);
+      background: rgba(255,255,255,.06);
+      box-shadow:
+        0 0 35px rgba(238,183,210,.10),
+        0 20px 70px rgba(0,0,0,.25);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .cell {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      border-right: 1px solid rgba(255,247,239,.20);
+      border-bottom: 1px solid rgba(255,247,239,.20);
+      background: rgba(255,255,255,.025);
+    }
+
+    .cell:nth-child(9n) {
+      border-right: none;
+    }
+
+    .cell:nth-child(n+73) {
+      border-bottom: none;
+    }
+
+    /* Strong 3x3 borders */
+    .cell:nth-child(3n) {
+      border-right: 2px solid rgba(255,247,239,.55);
+    }
+
+    .cell:nth-child(9n) {
+      border-right: none;
+    }
+
+    .cell:nth-child(n+19):nth-child(-n+27),
+    .cell:nth-child(n+46):nth-child(-n+54) {
+      border-bottom: 2px solid rgba(255,247,239,.55);
+    }
+
+    .cell input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      text-align: center;
+      color: var(--pink-light);
+      font-size: clamp(18px, 4vw, 29px);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .cell.given {
+      background: rgba(255,247,239,.055);
+    }
+
+    .cell.given input {
+      color: var(--cream);
+      font-weight: 600;
+      cursor: default;
+    }
+
+    .cell:not(.given):hover {
+      background: rgba(238,183,210,.12);
+    }
+
+    .cell.selected {
+      background: rgba(238,183,210,.18);
+      box-shadow: inset 0 0 0 2px rgba(249,220,233,.35);
+    }
+
+    .cell.wrong {
+      background: rgba(255,142,174,.20);
+      animation: shake .25s ease;
+    }
+
+    .cell.correct {
+      background: rgba(204,232,211,.12);
+    }
+
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-4px);
+      }
+
+      75% {
+        transform: translateX(4px);
+      }
+    }
+
+    .sudoku-note {
+      margin-top: 15px;
+      color: rgba(255,247,239,.55);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .game-message {
+      min-height: 30px;
+      margin-top: 18px;
+      color: var(--pink-light);
+      font-size: 18px;
+      transition: .3s ease;
+    }
+
+    .game-message.error {
+      color: var(--wrong);
+    }
+
+    .game-message.success {
+      color: var(--correct);
+      font-size: 22px;
+    }
+
+    .clear-button {
+      margin-top: 15px;
+      padding: 9px 20px;
+      border: 1px solid rgba(255,247,239,.25);
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      color: rgba(255,247,239,.75);
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .clear-button:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    /* =========================
+       ACCESS
+    ========================= */
+
+    .access-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(circle at center, rgba(73,52,100,.8), rgba(8,6,18,.98));
+      opacity: 0;
+    }
+
+    .access-overlay.show {
+      display: flex;
+      animation: overlayIn 1.2s ease forwards;
+    }
+
+    .access-content {
+      padding: 30px;
+    }
+
+    .access-symbol {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .access-title {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(48px, 9vw, 80px);
+      color: var(--pink-light);
+    }
+
+    .access-text {
+      margin-top: 15px;
+      font-size: 20px;
+      color: rgba(255,247,239,.8);
+    }
+
+    @keyframes overlayIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.12);
+      }
+    }
+
+    /* =========================
+       FADE
+    ========================= */
 
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(22px);
       }
 
       to {
@@ -333,29 +564,19 @@
       }
     }
 
-    /* ---------- TRANSITION ---------- */
-
-    .transition {
-      position: fixed;
-      z-index: 100;
-      inset: 0;
-      background: #0c0919;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 1.2s ease;
-    }
-
-    .transition.active {
-      opacity: 1;
-    }
-
-    /* ---------- MOBILE ---------- */
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 600px) {
+
+      #scene2 {
+        padding-top: 35px;
+      }
+
       .moon {
         width: 110px;
         height: 110px;
-        margin-bottom: 30px;
       }
 
       .small-title {
@@ -363,13 +584,20 @@
         letter-spacing: 3px;
       }
 
-      .subtitle {
-        padding: 0 15px;
+      .scene-text {
+        font-size: 18px;
       }
 
-      .enter-button {
-        font-size: 16px;
-        padding: 13px 24px;
+      .sudoku {
+        width: min(94vw, 430px);
+      }
+
+      .cell input {
+        font-size: clamp(15px, 5vw, 24px);
+      }
+
+      .scene-title {
+        font-size: clamp(40px, 13vw, 60px);
       }
     }
   </style>
@@ -377,7 +605,10 @@
 
 <body>
 
-  <!-- Stars -->
+  <!-- =========================
+       STARS
+  ========================= -->
+
   <div class="stars">
     <span class="star"></span>
     <span class="star"></span>
@@ -396,17 +627,13 @@
     <span class="star"></span>
   </div>
 
-  <!-- Floating moon dust -->
-  <div class="dust">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
 
-  <!-- Scene 1 -->
-  <main class="scene">
+  <!-- =========================
+       SCENE 1
+  ========================= -->
+
+  <main class="scene active" id="scene1">
+
     <div class="content">
 
       <div class="moon">
@@ -414,7 +641,7 @@
       </div>
 
       <div class="small-title">
-        A little invitation
+        A Little Invitation
       </div>
 
       <h1 class="title">
@@ -428,7 +655,10 @@
         điều gì đó đến anh đấy.
       </p>
 
-      <button class="enter-button" onclick="enterUniverse()">
+      <button
+        class="enter-button"
+        onclick="enterUniverse()"
+      >
         ♡ &nbsp; Enter my little universe
       </button>
 
@@ -437,22 +667,444 @@
       </div>
 
     </div>
+
   </main>
 
-  <!-- Transition -->
-  <div class="transition" id="transition"></div>
+
+  <!-- =========================
+       SCENE 2
+  ========================= -->
+
+  <main class="scene" id="scene2">
+
+    <div class="content">
+
+      <div class="chapter">
+        Planet 01 · The Gate
+      </div>
+
+      <h2 class="scene-title">
+        A Little Question
+      </h2>
+
+      <p class="scene-text">
+        Để truy cập bức thư,<br>
+        anh yêu vui lòng chọn câu trả lời đúng!
+      </p>
+
+      <p class="tease">
+        Đương nhiên anh có thể chọn sai, đó là...
+        <strong>NẾU ANH CÓ THỂ THÔI 😉</strong>
+      </p>
+
+      <div class="sudoku-wrapper">
+        <div class="sudoku" id="sudoku"></div>
+      </div>
+
+      <p class="sudoku-note">
+        Điền các ô trống bằng số từ 1 đến 9 ♡
+      </p>
+
+      <div
+        class="game-message"
+        id="gameMessage"
+      >
+        Một cánh cổng nhỏ đang chờ anh mở...
+      </div>
+
+      <button
+        class="clear-button"
+        onclick="clearSelected()"
+      >
+        Clear selected cell
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       ACCESS OVERLAY
+  ========================= -->
+
+  <div
+    class="access-overlay"
+    id="accessOverlay"
+  >
+
+    <div class="access-content">
+
+      <div class="access-symbol">
+        🌙
+      </div>
+
+      <div class="access-title">
+        Access Granted
+      </div>
+
+      <div class="access-text">
+        Welcome to the universe I made only for you. ♡
+      </div>
+
+    </div>
+
+  </div>
+
 
   <script>
-    function enterUniverse() {
-      const transition = document.getElementById("transition");
 
-      transition.classList.add("active");
+    /* =====================================
+       SCENE CONTROL
+    ===================================== */
+
+    function enterUniverse() {
+
+      const scene1 = document.getElementById("scene1");
+      const scene2 = document.getElementById("scene2");
+
+      scene1.style.opacity = "0";
+      scene1.style.transition = "opacity 1s ease";
 
       setTimeout(() => {
-        alert("Scene 2 sẽ là chiếc cổng Sudoku của em bé 🌙🎀");
-        transition.classList.remove("active");
-      }, 1200);
+
+        scene1.classList.remove("active");
+        scene2.classList.add("active");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "instant"
+        });
+
+        scene2.style.opacity = "0";
+
+        requestAnimationFrame(() => {
+
+          scene2.style.transition = "opacity 1s ease";
+
+          requestAnimationFrame(() => {
+            scene2.style.opacity = "1";
+          });
+
+        });
+
+      }, 1000);
     }
+
+
+    /* =====================================
+       SUDOKU
+    ===================================== */
+
+    const solution = [
+
+      [4,3,5,2,6,9,7,8,1],
+      [6,8,2,5,7,1,4,9,3],
+      [1,9,7,8,3,4,5,6,2],
+
+      [8,2,6,1,9,5,3,4,7],
+      [3,7,4,6,8,2,9,1,5],
+      [9,5,1,7,4,3,6,2,8],
+
+      [5,1,9,3,2,6,8,7,4],
+      [2,4,8,9,5,7,1,3,6],
+      [7,6,3,4,1,8,2,5,9]
+
+    ];
+
+
+    /*
+      1 = given / locked
+      0 = empty / player must fill
+    */
+
+    const puzzle = [
+
+      [1,0,1,1,0,1,1,0,0],
+      [1,1,0,0,1,0,1,1,0],
+      [1,1,0,0,0,1,1,0,0],
+
+      [1,1,0,1,0,1,0,1,0],
+      [0,0,1,1,0,1,1,0,0],
+      [0,1,0,0,0,1,0,1,1],
+
+      [1,0,1,1,0,0,0,1,1],
+      [0,1,0,0,1,0,0,1,1],
+      [1,0,1,0,1,1,0,0,0]
+
+    ];
+
+
+    let selectedCell = null;
+    let completed = false;
+
+
+    /* =====================================
+       BUILD BOARD
+    ===================================== */
+
+    function buildSudoku() {
+
+      const board = document.getElementById("sudoku");
+
+      board.innerHTML = "";
+
+      for (let row = 0; row < 9; row++) {
+
+        for (let col = 0; col < 9; col++) {
+
+          const cell = document.createElement("div");
+
+          cell.className = "cell";
+
+          const input = document.createElement("input");
+
+          input.type = "text";
+          input.inputMode = "numeric";
+          input.maxLength = 1;
+          input.autocomplete = "off";
+
+          input.dataset.row = row;
+          input.dataset.col = col;
+
+          /* GIVEN */
+
+          if (puzzle[row][col] === 1) {
+
+            cell.classList.add("given");
+
+            input.value = solution[row][col];
+
+            input.readOnly = true;
+
+          }
+
+          /* PLAYER CELL */
+
+          else {
+
+            input.addEventListener("focus", () => {
+
+              selectedCell = input;
+
+              document.querySelectorAll(".cell")
+                .forEach(c => c.classList.remove("selected"));
+
+              cell.classList.add("selected");
+
+            });
+
+
+            input.addEventListener("input", () => {
+
+              const value = input.value;
+
+              /* Only numbers 1-9 */
+
+              if (!/^[1-9]$/.test(value)) {
+
+                input.value = "";
+
+                return;
+
+              }
+
+              checkCell(input, cell);
+
+            });
+
+
+            input.addEventListener("keydown", event => {
+
+              if (
+                event.key === "Backspace" ||
+                event.key === "Delete"
+              ) {
+
+                input.value = "";
+
+                cell.classList.remove(
+                  "wrong",
+                  "correct"
+                );
+
+              }
+
+            });
+
+          }
+
+          cell.appendChild(input);
+
+          board.appendChild(cell);
+
+        }
+
+      }
+
+    }
+
+
+    /* =====================================
+       CHECK INDIVIDUAL CELL
+    ===================================== */
+
+    function checkCell(input, cell) {
+
+      const row = Number(input.dataset.row);
+      const col = Number(input.dataset.col);
+
+      const value = Number(input.value);
+
+      cell.classList.remove(
+        "wrong",
+        "correct"
+      );
+
+
+      if (value === solution[row][col]) {
+
+        cell.classList.add("correct");
+
+      }
+
+      else {
+
+        cell.classList.add("wrong");
+
+        showMessage(
+          "Hmm... hình như ngôi sao này chưa đúng rồi ♡",
+          true
+        );
+
+      }
+
+
+      checkComplete();
+
+    }
+
+
+    /* =====================================
+       CHECK COMPLETE
+    ===================================== */
+
+    function checkComplete() {
+
+      if (completed) return;
+
+      const inputs =
+        document.querySelectorAll(
+          "#sudoku .cell:not(.given) input"
+        );
+
+
+      for (const input of inputs) {
+
+        const row =
+          Number(input.dataset.row);
+
+        const col =
+          Number(input.dataset.col);
+
+        const value =
+          Number(input.value);
+
+
+        if (
+          !value ||
+          value !== solution[row][col]
+        ) {
+
+          return;
+
+        }
+
+      }
+
+
+      completed = true;
+
+      showMessage(
+        "Anh mở được cánh cổng rồi... ♡",
+        false
+      );
+
+      setTimeout(() => {
+
+        document
+          .getElementById("accessOverlay")
+          .classList.add("show");
+
+      }, 700);
+
+
+      /*
+        Sau này Scene 3 sẽ được gọi ở đây.
+      */
+
+    }
+
+
+    /* =====================================
+       MESSAGE
+    ===================================== */
+
+    function showMessage(text, error) {
+
+      const message =
+        document.getElementById("gameMessage");
+
+      message.textContent = text;
+
+      message.classList.toggle(
+        "error",
+        error
+      );
+
+      message.classList.toggle(
+        "success",
+        !error
+      );
+
+    }
+
+
+    /* =====================================
+       CLEAR SELECTED
+    ===================================== */
+
+    function clearSelected() {
+
+      if (!selectedCell) return;
+
+      if (
+        selectedCell.closest(".cell")
+          .classList.contains("given")
+      ) {
+
+        return;
+
+      }
+
+      selectedCell.value = "";
+
+      selectedCell
+        .closest(".cell")
+        .classList.remove(
+          "wrong",
+          "correct"
+        );
+
+    }
+
+
+    /* =====================================
+       START
+    ===================================== */
+
+    buildSudoku();
+
   </script>
 
 </body>
