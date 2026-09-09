@@ -377,7 +377,7 @@ button {
 .roach-answers {
   position: relative;
   width: min(620px, 94vw);
-  min-height: 110px;
+  min-height: 180px;
   margin: 48px auto 0;
   padding-bottom: 24px;
   display: flex;
@@ -398,14 +398,15 @@ button {
 .no-answer {
   position: relative;
   z-index: 3;
-  transition:
-    left .45s cubic-bezier(.22, 1, .36, 1),
-    top .45s cubic-bezier(.22, 1, .36, 1);
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
 }
 
 .no-answer.running {
   position: absolute;
   z-index: 10;
+  left: 0;
+  top: 0;
 }
 
 .roach-message {
@@ -1207,11 +1208,20 @@ function handleNoPointerDown(e) {
   moveNoButton();
 }
 
+let lastNoMove = 0;
+
 document.addEventListener("pointermove", function(e) {
   if (
     document.getElementById("scene3").classList.contains("hidden") ||
     window.matchMedia("(pointer: coarse)").matches
   ) {
+    return;
+  }
+
+  const now = performance.now();
+
+  // Không cho nút đổi vị trí liên tục.
+  if (now - lastNoMove < 550) {
     return;
   }
 
@@ -1225,12 +1235,12 @@ document.addEventListener("pointermove", function(e) {
     e.clientY - centerY
   );
 
-  // Start running before the cursor can actually reach it.
-  if (distance < 110) {
+  if (distance < 100) {
+    lastNoMove = now;
     moveNoButton();
   }
 });
-
+  
 function moveNoButton() {
   const area = document.getElementById("roachAnswers");
 
@@ -1254,18 +1264,12 @@ function moveNoButton() {
     areaHeight - buttonHeight - padding
   );
 
-  const x =
-    padding +
-    Math.random() * Math.max(0, maxX - padding);
+  const x = padding + Math.random() * Math.max(0, maxX - padding);
+  const y = padding + Math.random() * Math.max(0, maxY - padding);
 
-  const y =
-    padding +
-    Math.random() * Math.max(0, maxY - padding);
-
-  noButton.style.left = x + "px";
-  noButton.style.top = y + "px";
+  noButton.style.transform =
+    `translate3d(${x}px, ${y}px, 0)`;
 }
-
 
 </script>
 
