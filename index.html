@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>The Universe I Made Only for U</title>
+
+  <!-- Romantic fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --night: #100d25;
+      --night-light: #21183d;
+      --pink: #eeb7d2;
+      --pink-light: #f9dce9;
+      --cream: #fff7ef;
+      --gold: #e8c98c;
+      --white: #fffafc;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 25%, #41315d 0%, transparent 28%),
+        radial-gradient(circle at 80% 70%, #291b47 0%, transparent 30%),
+        linear-gradient(160deg, #0c0a1c, #18112f 55%, #0b0918);
+      color: var(--cream);
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    /* ---------- STAR FIELD ---------- */
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.65;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    .star:nth-child(1)  { left: 8%;  top: 15%; animation-delay: .2s; }
+    .star:nth-child(2)  { left: 18%; top: 34%; animation-delay: 1s; }
+    .star:nth-child(3)  { left: 27%; top: 12%; animation-delay: 1.7s; }
+    .star:nth-child(4)  { left: 37%; top: 27%; animation-delay: .5s; }
+    .star:nth-child(5)  { left: 48%; top: 9%;  animation-delay: 2s; }
+    .star:nth-child(6)  { left: 59%; top: 18%; animation-delay: .8s; }
+    .star:nth-child(7)  { left: 72%; top: 11%; animation-delay: 1.4s; }
+    .star:nth-child(8)  { left: 84%; top: 29%; animation-delay: .3s; }
+    .star:nth-child(9)  { left: 91%; top: 17%; animation-delay: 1.8s; }
+    .star:nth-child(10) { left: 13%; top: 68%; animation-delay: 2.2s; }
+    .star:nth-child(11) { left: 25%; top: 82%; animation-delay: .9s; }
+    .star:nth-child(12) { left: 41%; top: 72%; animation-delay: 1.2s; }
+    .star:nth-child(13) { left: 65%; top: 78%; animation-delay: .6s; }
+    .star:nth-child(14) { left: 79%; top: 62%; animation-delay: 1.6s; }
+    .star:nth-child(15) { left: 94%; top: 81%; animation-delay: 2.4s; }
+
+    @keyframes twinkle {
+      0%, 100% {
+        transform: scale(.6);
+        opacity: .25;
+      }
+
+      50% {
+        transform: scale(1.7);
+        opacity: 1;
+      }
+    }
+
+    /* ---------- FLOATING DUST ---------- */
+
+    .dust {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .dust span {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--pink-light);
+      border-radius: 50%;
+      opacity: .25;
+      animation: floatDust 9s linear infinite;
+    }
+
+    .dust span:nth-child(1) { left: 15%; animation-delay: 0s; }
+    .dust span:nth-child(2) { left: 35%; animation-delay: 3s; }
+    .dust span:nth-child(3) { left: 55%; animation-delay: 6s; }
+    .dust span:nth-child(4) { left: 75%; animation-delay: 2s; }
+    .dust span:nth-child(5) { left: 90%; animation-delay: 5s; }
+
+    @keyframes floatDust {
+      from {
+        transform: translateY(105vh);
+      }
+
+      to {
+        transform: translateY(-10vh);
+      }
+    }
+
+    /* ---------- MAIN ---------- */
+
+    .scene {
+      position: relative;
+      z-index: 5;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .content {
+      width: min(720px, 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .small-title {
+      font-size: 15px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 1.4s ease forwards;
+      animation-delay: .5s;
+    }
+
+    .title {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(48px, 9vw, 90px);
+      line-height: 1;
+      color: var(--pink-light);
+      text-shadow:
+        0 0 20px rgba(238,183,210,.25),
+        0 0 50px rgba(238,183,210,.12);
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards;
+      animation-delay: .9s;
+    }
+
+    .subtitle {
+      margin-top: 22px;
+      max-width: 550px;
+      font-size: clamp(18px, 3vw, 23px);
+      line-height: 1.6;
+      color: rgba(255,247,239,.88);
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards;
+      animation-delay: 1.5s;
+    }
+
+    .moon {
+      position: relative;
+      width: 145px;
+      height: 145px;
+      margin-bottom: 38px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #fffdf6 0%, #fff1d2 45%, #e5c78d 100%);
+      box-shadow:
+        0 0 25px rgba(255,239,190,.55),
+        0 0 80px rgba(255,229,163,.2);
+      opacity: 0;
+      animation:
+        moonAppear 1.8s ease forwards,
+        moonFloat 6s ease-in-out 2s infinite;
+    }
+
+    .moon::before,
+    .moon::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(185,148,107,.13);
+    }
+
+    .moon::before {
+      width: 25px;
+      height: 25px;
+      top: 35px;
+      left: 30px;
+    }
+
+    .moon::after {
+      width: 18px;
+      height: 18px;
+      bottom: 32px;
+      right: 28px;
+    }
+
+    @keyframes moonAppear {
+      from {
+        opacity: 0;
+        transform: scale(.65);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes moonFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ---------- RIBBON ---------- */
+
+    .ribbon {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      width: 38px;
+      height: 80px;
+      background: var(--pink);
+      transform: translateX(-50%) rotate(3deg);
+      box-shadow: 0 5px 20px rgba(0,0,0,.15);
+    }
+
+    .ribbon::before,
+    .ribbon::after {
+      content: "";
+      position: absolute;
+      top: 55px;
+      width: 34px;
+      height: 50px;
+      background: var(--pink);
+    }
+
+    .ribbon::before {
+      left: -27px;
+      transform: rotate(-28deg);
+      clip-path: polygon(0 0, 100% 20%, 65% 100%, 45% 72%);
+    }
+
+    .ribbon::after {
+      right: -27px;
+      transform: rotate(28deg);
+      clip-path: polygon(0 20%, 100% 0, 55% 72%, 35% 100%);
+    }
+
+    /* ---------- BUTTON ---------- */
+
+    .enter-button {
+      position: relative;
+      margin-top: 38px;
+      padding: 15px 30px;
+      border: 1px solid rgba(255,247,239,.45);
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      color: var(--cream);
+      font-family: inherit;
+      font-size: 18px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition:
+        transform .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards;
+      animation-delay: 2.2s;
+    }
+
+    .enter-button:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: rgba(238,183,210,.16);
+      box-shadow: 0 10px 35px rgba(238,183,210,.18);
+    }
+
+    .enter-button:active {
+      transform: scale(.97);
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    .hint {
+      margin-top: 18px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: rgba(255,247,239,.45);
+      opacity: 0;
+      animation: fadeUp 1.5s ease forwards;
+      animation-delay: 2.7s;
+    }
+
+    /* ---------- ANIMATION ---------- */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- TRANSITION ---------- */
+
+    .transition {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      background: #0c0919;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .transition.active {
+      opacity: 1;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 600px) {
+      .moon {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 30px;
+      }
+
+      .small-title {
+        font-size: 11px;
+        letter-spacing: 3px;
+      }
+
+      .subtitle {
+        padding: 0 15px;
+      }
+
+      .enter-button {
+        font-size: 16px;
+        padding: 13px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Stars -->
+  <div class="stars">
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+    <span class="star"></span>
+  </div>
+
+  <!-- Floating moon dust -->
+  <div class="dust">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Scene 1 -->
+  <main class="scene">
+    <div class="content">
+
+      <div class="moon">
+        <div class="ribbon"></div>
+      </div>
+
+      <div class="small-title">
+        A little invitation
+      </div>
+
+      <h1 class="title">
+        The Universe<br>
+        I Made Only For U
+      </h1>
+
+      <p class="subtitle">
+        Ơ kìa...<br>
+        Hình như em bé của anh muốn gửi<br>
+        điều gì đó đến anh đấy.
+      </p>
+
+      <button class="enter-button" onclick="enterUniverse()">
+        ♡ &nbsp; Enter my little universe
+      </button>
+
+      <div class="hint">
+        made with love, just for you
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Transition -->
+  <div class="transition" id="transition"></div>
+
+  <script>
+    function enterUniverse() {
+      const transition = document.getElementById("transition");
+
+      transition.classList.add("active");
+
+      setTimeout(() => {
+        alert("Scene 2 sẽ là chiếc cổng Sudoku của em bé 🌙🎀");
+        transition.classList.remove("active");
+      }, 1200);
+    }
+  </script>
+
+</body>
+</html>
