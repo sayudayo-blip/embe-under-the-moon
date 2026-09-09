@@ -955,6 +955,301 @@ button {
   font-family: "Cormorant Garamond", serif;
 }
   
+  /* ===== SCENE 5 · MEMORY FILM ===== */
+
+#scene5 {
+  position: relative;
+  z-index: 5;
+  padding: 24px;
+}
+
+#scene5 .memory-stage {
+  width: min(900px, 94vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#scene5 .memory-eyebrow {
+  margin-bottom: 5px;
+  color: #e8c98c;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+#scene5 .memory-title {
+  margin: 0;
+  color: #f9dce9;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(42px, 7vw, 64px);
+  font-weight: 500;
+  line-height: 1.15;
+  text-align: center;
+}
+
+#scene5 .memory-subtitle {
+  margin: 7px 0 20px;
+  color: rgba(255,247,239,.78);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* ===== TV ===== */
+
+#scene5 .tv-frame {
+  width: min(700px, 88vw);
+  padding: 20px 20px 15px;
+  border: 2px solid rgba(232,201,140,.55);
+  border-radius: 30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(62,40,78,.98),
+      rgba(24,15,44,.98)
+    );
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.48),
+    0 0 45px rgba(232,201,140,.08),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* Màn hình vuông vì ảnh của em là 4×4 */
+
+#scene5 .tv-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 8px solid #0b0817;
+  border-radius: 18px;
+  background: #090714;
+  box-shadow:
+    inset 0 0 35px rgba(0,0,0,.75),
+    0 0 0 1px rgba(255,255,255,.08);
+  perspective: 1000px;
+}
+
+/* Ảnh luôn giữ nguyên tỉ lệ 4×4 */
+
+#scene5 .memory-photo {
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #090714;
+  transform-origin: center bottom;
+}
+
+/* Ảnh cũ trượt/lật xuống */
+
+#scene5 .memory-photo.flip-out {
+  animation:
+    memoryFlipOut
+    .85s
+    cubic-bezier(.65,0,.35,1)
+    forwards;
+}
+
+/* Ảnh mới đi vào */
+
+#scene5 .memory-photo.flip-in {
+  animation:
+    memoryFlipIn
+    .85s
+    cubic-bezier(.22,1,.36,1)
+    forwards;
+}
+
+@keyframes memoryFlipOut {
+
+  0% {
+    opacity: 1;
+    transform:
+      translateY(0)
+      rotateX(0deg)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateY(105%)
+      rotateX(-12deg)
+      scale(.96);
+  }
+
+}
+
+@keyframes memoryFlipIn {
+
+  0% {
+    opacity: 0;
+    transform:
+      translateY(-105%)
+      rotateX(12deg)
+      scale(.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translateY(0)
+      rotateX(0deg)
+      scale(1);
+  }
+
+}
+
+/* ===== hiệu ứng màn hình TV ===== */
+
+#scene5 .tv-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.025) 0px,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  opacity: .45;
+}
+
+#scene5 .tv-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 48%,
+      rgba(0,0,0,.24) 100%
+    );
+}
+
+/* ===== chân TV ===== */
+
+#scene5 .tv-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 11px;
+}
+
+#scene5 .tv-brand {
+  color: rgba(255,247,239,.48);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 11px;
+  letter-spacing: .2em;
+}
+
+#scene5 .tv-light {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f4c5db;
+  box-shadow:
+    0 0 8px rgba(244,197,219,.8),
+    0 0 18px rgba(244,197,219,.35);
+
+  animation: tvLightPulse 2s ease-in-out infinite;
+}
+
+@keyframes tvLightPulse {
+
+  0%, 100% {
+    opacity: .45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+}
+
+/* ===== bộ đếm ảnh ===== */
+
+#scene5 .memory-counter {
+  display: flex;
+  gap: 9px;
+  margin-top: 13px;
+  color: rgba(255,247,239,.58);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  letter-spacing: .12em;
+}
+
+#scene5 .memory-counter span:nth-child(2) {
+  color: #e8c98c;
+}
+
+/* ===== nút sau khi xem hết phim ===== */
+
+#scene5 .memory-continue {
+  margin-top: 18px;
+  padding: 13px 27px;
+  border: 1px solid rgba(255,247,239,.35);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffe3ef, #f4c5db);
+  color: #321a39;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+#scene5 .memory-continue:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255,185,215,.22);
+}
+
+@media (max-width: 600px) {
+
+  #scene5 {
+    padding: 12px;
+  }
+
+  #scene5 .memory-title {
+    font-size: 44px;
+  }
+
+  #scene5 .memory-subtitle {
+    font-size: 16px;
+    padding: 0 12px;
+    margin-bottom: 15px;
+  }
+
+  #scene5 .tv-frame {
+    width: 94vw;
+    padding: 12px 12px 10px;
+    border-radius: 22px;
+  }
+
+  #scene5 .tv-screen {
+    border-width: 5px;
+    border-radius: 13px;
+  }
+
+}
+  
 /* ===== SCENE 1 ORIGINAL UI ===== */
 
 #scene1 {
@@ -1784,6 +2079,59 @@ button {
   </div>
 
 </section>
+<!-- SCENE 5 -->
+<section id="scene5" class="scene hidden">
+
+  <div class="memory-stage">
+
+    <div class="memory-eyebrow">
+      Planet 04 · Our Little Film
+    </div>
+
+    <h2 class="memory-title">
+      Những ngày có anh
+    </h2>
+
+    <p class="memory-subtitle">
+      Em muốn tua lại một chút những ngày chúng ta đã có nhau. ♡
+    </p>
+
+    <div class="tv-frame">
+
+      <div class="tv-screen">
+        <div id="memoryPhoto" class="memory-photo"></div>
+      </div>
+
+      <div class="tv-bottom">
+        <span class="tv-brand">OUR LITTLE FILM</span>
+        <span class="tv-light"></span>
+      </div>
+
+    </div>
+
+    <div class="memory-counter">
+      <span id="memoryCurrent">01</span>
+      <span>—</span>
+      <span id="memoryTotal">41</span>
+    </div>
+
+  <div class="memory-controls">
+  <button class="memory-nav" onclick="prevMemory()">‹</button>
+
+  <button
+    id="memoryContinue"
+    class="memory-continue"
+    onclick="goToScene6()"
+  >
+    Continue our story ♡
+  </button>
+
+  <button class="memory-nav" onclick="nextMemory()">›</button>
+</div>
+
+  </div>
+
+</section>
   
 <!-- ACCESS OVERLAY -->
 <div id="accessOverlay" class="access-overlay hidden">
@@ -1803,6 +2151,10 @@ button {
   <source src="bgm.mp3" type="audio/mpeg">
 </audio>
 
+  <audio id="memoryBgm" loop>
+  <source src="memoryBgm.mp3" type="audio/mpeg">
+</audio>
+  
 <audio id="buzz">
   <source src="Wrong Buzzer.mp3" type="audio/mpeg">
 </audio>
@@ -2046,7 +2398,24 @@ function goToScene3() {
 
   resetNoButton();
 }
+  
+function resetNoButton() {
+  noButton.classList.remove("running");
+  noButton.style.transform = "";
+}
+  
+function chooseYes() {
+  const message = document.getElementById("roachMessage");
+  const gate = document.getElementById("letterGate");
 
+  message.textContent = "Aww, em cũng yêu anh. 🥺♡";
+  message.classList.remove("show");
+  void message.offsetWidth;
+  message.classList.add("show");
+
+  gate.classList.remove("hidden");
+}
+  
 function openLetterGate() {
   const gate = document.getElementById("letterGate");
   const flash = document.getElementById("letterFlash");
@@ -2075,18 +2444,140 @@ function openLetterGate() {
   }, 1450);
 }
 
-function chooseYes() {
-  const message = document.getElementById("roachMessage");
+  /* =========================
+   SCENE 5 · MEMORY FILM
+========================= */
 
-  message.classList.remove("show");
-  message.textContent = "Aww, em cũng yêu anh. 🥺♡";
+const memoryPhotos = [
+  "memory1.jpg",
+  "memory2.jpg",
+  "memory3.jpg",
+  "memory4.jpg",
+  "memory5.jpg",
+  "memory6.jpg",
+  "memory7.jpg",
+  "memory8.jpg",
+  "memory9.jpg",
+  "memory10.jpg",
+  "memory11.jpg",
+  "memory12.jpg",
+  "memory13.jpg",
+  "memory14.jpg",
+  "memory15.jpg",
+  "memory16.jpg",
+  "memory17.jpg",
+  "memory18.jpg",
+  "memory19.jpg",
+  "memory20.jpg",
+  "memory21.jpg",
+  "memory22.jpg",
+  "memory23.jpg",
+  "memory24.jpg",
+  "memory25.jpg",
+  "memory26.jpg",
+  "memory27.jpg",
+  "memory28.jpg",
+  "memory29.jpg",
+  "memory30.jpg",
+  "memory31.jpg",
+  "memory32.jpg",
+  "memory33.jpg",
+  "memory34.jpg",
+  "memory35.jpg",
+  "memory36.jpg",
+  "memory37.jpg",
+  "memory38.jpg",
+  "memory39.jpg",
+  "memory40.jpg",
+  "memory41.jpg"
+];
 
-  void message.offsetWidth;
+let memoryIndex = 0;
+let memoryTimer = null;
 
-  message.classList.add("show");
+function goToScene5() {
+
+  document.getElementById("scene4").classList.add("hidden");
+  document.getElementById("scene5").classList.remove("hidden");
+
+  /* Đổi nhạc */
+
+  const bgm = document.getElementById("bgm");
+  const memoryBgm = document.getElementById("memoryBgm");
+
+  if (bgm) {
+    bgm.pause();
+    bgm.currentTime = 0;
+  }
+
+  if (memoryBgm) {
+    memoryBgm.volume = 0.45;
+    memoryBgm.currentTime = 0;
+    memoryBgm.play().catch(() => {});
+  }
+
+  startMemoryFilm();
+}
+
+function startMemoryFilm() {
+  const photo = document.getElementById("memoryPhoto");
+  const current = document.getElementById("memoryCurrent");
+  const total = document.getElementById("memoryTotal");
+
+  memoryIndex = 0;
+
+  total.textContent = String(memoryPhotos.length).padStart(2, "0");
+  current.textContent = "01";
+
+  photo.classList.remove("flip-in", "flip-out");
+  photo.style.backgroundImage = `url("${memoryPhotos[0]}")`;
+}
+
+function nextMemory() {
+  if (memoryIndex >= memoryPhotos.length - 1) return;
+
+  const photo = document.getElementById("memoryPhoto");
+
+  photo.classList.remove("flip-in");
+  void photo.offsetWidth;
+  photo.classList.add("flip-out");
 
   setTimeout(() => {
-    document.getElementById("letterGate").classList.remove("hidden");
+    memoryIndex++;
+
+    photo.style.backgroundImage =
+      `url("${memoryPhotos[memoryIndex]}")`;
+
+    document.getElementById("memoryCurrent").textContent =
+      String(memoryIndex + 1).padStart(2, "0");
+
+    photo.classList.remove("flip-out");
+    void photo.offsetWidth;
+    photo.classList.add("flip-in");
+  }, 850);
+}
+
+function prevMemory() {
+  if (memoryIndex <= 0) return;
+
+  const photo = document.getElementById("memoryPhoto");
+
+  photo.classList.remove("flip-in");
+  void photo.offsetWidth;
+  photo.classList.add("flip-out");
+
+  setTimeout(() => {
+    memoryIndex--;
+
+    photo.style.backgroundImage =
+      `url("${memoryPhotos[memoryIndex]}")`;
+
+    document.getElementById("memoryCurrent").textContent =
+      String(memoryIndex + 1).padStart(2, "0");
+
+    photo.classList.remove("flip-out");
+    void photo.offsetWidth;
+    photo.classList.add("flip-in");
   }, 850);
 }
   
