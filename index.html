@@ -1198,6 +1198,84 @@ button {
   color: #e8c98c;
 }
 
+  /* ===== SCENE 5 · MEMORY NAVIGATION ===== */
+
+#scene5 .memory-controls {
+  position: relative;
+  width: min(700px, 88vw);
+  height: 58px;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scene5 .memory-nav {
+  position: absolute;
+  top: -465px;
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+  border: 1px solid rgba(232,201,140,.55);
+
+  background: rgba(255,255,255,.07);
+  color: #f9dce9;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 42px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+#scene5 .memory-nav:first-child {
+  left: -72px;
+}
+
+#scene5 .memory-nav:last-child {
+  right: -72px;
+}
+
+#scene5 .memory-nav:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,.13);
+  box-shadow: 0 0 22px rgba(232,201,140,.28);
+}
+
+@media (max-width: 600px) {
+
+  #scene5 .memory-controls {
+    width: 94vw;
+  }
+
+  #scene5 .memory-nav {
+    width: 46px;
+    height: 46px;
+    font-size: 34px;
+    top: -255px;
+  }
+
+  #scene5 .memory-nav:first-child {
+    left: -2px;
+  }
+
+  #scene5 .memory-nav:last-child {
+    right: -2px;
+  }
+
+}
+  
 /* ===== nút sau khi xem hết phim ===== */
 
 #scene5 .memory-continue {
@@ -2449,49 +2527,50 @@ function openLetterGate() {
 ========================= */
 
 const memoryPhotos = [
-  "memory1.jpg",
-  "memory2.jpg",
-  "memory3.jpg",
-  "memory4.jpg",
-  "memory5.jpg",
-  "memory6.jpg",
-  "memory7.jpg",
-  "memory8.jpg",
-  "memory9.jpg",
-  "memory10.jpg",
-  "memory11.jpg",
-  "memory12.jpg",
-  "memory13.jpg",
-  "memory14.jpg",
-  "memory15.jpg",
-  "memory16.jpg",
-  "memory17.jpg",
-  "memory18.jpg",
-  "memory19.jpg",
-  "memory20.jpg",
-  "memory21.jpg",
-  "memory22.jpg",
-  "memory23.jpg",
-  "memory24.jpg",
-  "memory25.jpg",
-  "memory26.jpg",
-  "memory27.jpg",
-  "memory28.jpg",
-  "memory29.jpg",
-  "memory30.jpg",
-  "memory31.jpg",
-  "memory32.jpg",
-  "memory33.jpg",
-  "memory34.jpg",
-  "memory35.jpg",
-  "memory36.jpg",
-  "memory37.jpg",
-  "memory38.jpg",
-  "memory39.jpg",
-  "memory40.jpg",
-  "memory41.jpg"
+  "memory1.png",
+  "memory2.png",
+  "memory3.png",
+  "memory4.png",
+  "memory5.png",
+  "memory6.png",
+  "memory7.png",
+  "memory8.png",
+  "memory9.png",
+  "memory10.png",
+  "memory11.png",
+  "memory12.png",
+  "memory13.png",
+  "memory14.png",
+  "memory15.png",
+  "memory16.png",
+  "memory17.png",
+  "memory18.png",
+  "memory19.png",
+  "memory20.png",
+  "memory21.png",
+  "memory22.png",
+  "memory23.png",
+  "memory24.png",
+  "memory25.png",
+  "memory26.png",
+  "memory27.png",
+  "memory28.png",
+  "memory29.png",
+  "memory30.png",
+  "memory31.png",
+  "memory32.png",
+  "memory33.png",
+  "memory34.png",
+  "memory35.png",
+  "memory36.png",
+  "memory37.png",
+  "memory38.png",
+  "memory39.png",
+  "memory40.png",
+  "memory41.png"
 ];
 
+  
 let memoryIndex = 0;
 let memoryTimer = null;
 
