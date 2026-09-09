@@ -412,7 +412,29 @@ button {
   min-height: 30px;
   margin-top: 20px;
   color: #ffd8e8;
-  font-weight: 700;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.roach-message.show {
+  animation: roachMessageAppear .8s ease forwards;
+}
+
+@keyframes roachMessageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .small-note {
@@ -1157,10 +1179,16 @@ function goToScene3() {
 }
 
 function chooseYes() {
-  document.getElementById("roachMessage").textContent =
-    "Aww, em cũng yêu anh. 🥺♡";
-}
+  const message = document.getElementById("roachMessage");
 
+  message.classList.remove("show");
+  message.textContent = "Aww, em cũng yêu anh. 🥺♡";
+
+  void message.offsetWidth;
+
+  message.classList.add("show");
+}
+  
 /* =========================
    FLEEING "KHÔNG" BUTTON
 ========================= */
