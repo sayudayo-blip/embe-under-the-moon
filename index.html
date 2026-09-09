@@ -398,12 +398,14 @@ button {
 .no-answer {
   position: relative;
   z-index: 3;
-  transition: left .16s ease, top .16s ease;
+  transition:
+    left .45s cubic-bezier(.22, 1, .36, 1),
+    top .45s cubic-bezier(.22, 1, .36, 1);
 }
 
 .no-answer.running {
-  position: fixed;
-  z-index: 9999;
+  position: absolute;
+  z-index: 10;
 }
 
 .roach-message {
@@ -1202,22 +1204,36 @@ document.addEventListener("pointermove", function(e) {
 });
 
 function moveNoButton() {
-  const rect = noButton.getBoundingClientRect();
-
-  const padding = 12;
-  const maxX = Math.max(
-    padding,
-    window.innerWidth - rect.width - padding
-  );
-  const maxY = Math.max(
-    padding,
-    window.innerHeight - rect.height - padding
-  );
-
-  const x = padding + Math.random() * Math.max(0, maxX - padding);
-  const y = padding + Math.random() * Math.max(0, maxY - padding);
+  const area = document.getElementById("roachAnswers");
 
   noButton.classList.add("running");
+
+  const areaWidth = area.clientWidth;
+  const areaHeight = area.clientHeight;
+
+  const buttonWidth = noButton.offsetWidth;
+  const buttonHeight = noButton.offsetHeight;
+
+  const padding = 8;
+
+  const maxX = Math.max(
+    padding,
+    areaWidth - buttonWidth - padding
+  );
+
+  const maxY = Math.max(
+    padding,
+    areaHeight - buttonHeight - padding
+  );
+
+  const x =
+    padding +
+    Math.random() * Math.max(0, maxX - padding);
+
+  const y =
+    padding +
+    Math.random() * Math.max(0, maxY - padding);
+
   noButton.style.left = x + "px";
   noButton.style.top = y + "px";
 }
