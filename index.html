@@ -564,6 +564,100 @@
       }
     }
 
+
+    /* =========================
+       SCENE 3 · ROACH QUESTION
+    ========================= */
+
+    #scene3 {
+      padding-top: 55px;
+      padding-bottom: 55px;
+    }
+
+    .roach-question {
+      margin-top: 10px;
+      margin-bottom: 22px;
+      font-size: clamp(27px, 5vw, 42px);
+      line-height: 1.25;
+      color: var(--pink-light);
+      font-weight: 500;
+      text-shadow: 0 0 25px rgba(238,183,210,.12);
+    }
+
+    .roach-card {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto 28px;
+    }
+
+    .roach-image {
+      display: block;
+      width: min(300px, 72vw);
+      height: auto;
+      border-radius: 18px;
+      border: 2px solid rgba(255,247,239,.35);
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.38),
+        0 0 35px rgba(238,183,210,.12);
+    }
+
+    .roach-answers {
+      position: relative;
+      width: min(620px, 94vw);
+      min-height: 110px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      touch-action: manipulation;
+    }
+
+    .answer-button {
+      padding: 14px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,247,239,.35);
+      background: rgba(255,255,255,.07);
+      color: var(--cream);
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform .25s ease, background .25s ease;
+      backdrop-filter: blur(8px);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .answer-button:hover {
+      transform: translateY(-3px) scale(1.03);
+      background: rgba(238,183,210,.16);
+    }
+
+    .yes-answer {
+      border-color: rgba(204,232,211,.55);
+    }
+
+    .no-answer {
+      border-color: rgba(255,142,174,.55);
+      z-index: 2;
+    }
+
+    .no-answer.running {
+      position: absolute;
+      transition: left .16s ease, top .16s ease;
+    }
+
+    #roachMessage {
+      min-height: 58px;
+      max-width: 650px;
+      margin: 16px auto 0;
+      line-height: 1.5;
+    }
+
+    .roach-next {
+      display: none;
+      margin-top: 12px;
+    }
+
     /* =========================
        MOBILE
     ========================= */
@@ -598,6 +692,23 @@
 
       .scene-title {
         font-size: clamp(40px, 13vw, 60px);
+      }
+
+      #scene3 {
+        padding-top: 35px;
+      }
+
+      .roach-image {
+        width: min(260px, 72vw);
+      }
+
+      .roach-question {
+        font-size: clamp(25px, 7vw, 34px);
+      }
+
+      .answer-button {
+        font-size: 16px;
+        padding: 12px 20px;
       }
     }
   </style>
@@ -717,6 +828,68 @@
       >
         Clear selected cell
       </button>
+
+    </div>
+
+  </main>
+
+
+
+  <!-- =========================
+       SCENE 3
+  ========================= -->
+
+  <main class="scene" id="scene3">
+
+    <div class="content">
+
+      <div class="chapter">
+        Planet 02 · The Question
+      </div>
+
+      <h2 class="scene-title">
+        Anh có yêu em không?
+      </h2>
+
+      <p class="scene-text">
+        Nếu một ngày em biến thành con gián...
+      </p>
+
+      <div class="roach-card">
+        <img
+          src="roach.png"
+          alt="Một con gián"
+          class="roach-image"
+        >
+      </div>
+
+      <h3 class="roach-question">
+        Anh có còn yêu em không? 🪳
+      </h3>
+
+      <div class="roach-answers" id="roachAnswers">
+
+        <button
+          class="answer-button yes-answer"
+          onclick="roachYes()"
+        >
+          Có, anh vẫn yêu em 🥺
+        </button>
+
+        <button
+          class="answer-button no-answer"
+          id="noButton"
+          type="button"
+        >
+          Không 😭
+        </button>
+
+      </div>
+
+      <div
+        class="game-message"
+        id="roachMessage"
+      ></div>
 
     </div>
 
@@ -1057,18 +1230,143 @@ setTimeout(() => {
 
       setTimeout(() => {
 
-        document
-          .getElementById("accessOverlay")
-          .classList.add("show");
+        const overlay = document.getElementById("accessOverlay");
+        overlay.classList.add("show");
+
+        setTimeout(() => {
+          goToScene3();
+        }, 1800);
 
       }, 700);
 
+    }
 
-      /*
-        Sau này Scene 3 sẽ được gọi ở đây.
-      */
+
+
+    /* =====================================
+       SCENE 3 · ROACH QUESTION
+    ===================================== */
+
+    function goToScene3() {
+
+      const overlay = document.getElementById("accessOverlay");
+      const scene2 = document.getElementById("scene2");
+      const scene3 = document.getElementById("scene3");
+
+      overlay.classList.remove("show");
+      overlay.style.display = "none";
+      overlay.style.opacity = "0";
+
+      scene2.style.opacity = "0";
+      scene2.style.transition = "opacity .8s ease";
+
+      setTimeout(() => {
+
+        scene2.classList.remove("active");
+        scene3.classList.add("active");
+
+        window.scrollTo({
+          top: 0,
+          behavior: "instant"
+        });
+
+        scene3.style.opacity = "0";
+        scene3.style.transition = "opacity 1s ease";
+
+        requestAnimationFrame(() => {
+          scene3.style.opacity = "1";
+        });
+
+      }, 800);
+    }
+
+
+    function roachYes() {
+
+      const message = document.getElementById("roachMessage");
+
+      message.textContent =
+        "Ngoan. Biết ngay anh không nỡ bỏ em mà. 🥺♡";
+
+      message.classList.remove("error");
+      message.classList.add("success");
 
     }
+
+
+    function moveNoButton() {
+
+      const button = document.getElementById("noButton");
+      const area = document.getElementById("roachAnswers");
+
+      if (!button || !area) return;
+
+      button.classList.add("running");
+
+      const padding = 6;
+      const maxX = Math.max(
+        padding,
+        area.clientWidth - button.offsetWidth - padding
+      );
+
+      const maxY = Math.max(
+        padding,
+        area.clientHeight - button.offsetHeight - padding
+      );
+
+      const x = padding + Math.random() * Math.max(0, maxX - padding);
+      const y = padding + Math.random() * Math.max(0, maxY - padding);
+
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    }
+
+
+    /* 🖥️ Desktop:
+       Chỉ chạy khi chuột thật sự tiến lại gần nút.
+       Khi chuột đi xa, nút đứng im. */
+
+    document.addEventListener("mousemove", (event) => {
+
+      const button = document.getElementById("noButton");
+
+      if (!button || window.innerWidth <= 768) return;
+
+      const rect = button.getBoundingClientRect();
+
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const distance = Math.hypot(
+        event.clientX - centerX,
+        event.clientY - centerY
+      );
+
+      if (distance < 110) {
+        moveNoButton();
+      }
+
+    });
+
+
+    /* 📱 Mobile:
+       Chạm vào nút là nó giật sang chỗ khác. */
+
+    document.addEventListener("pointerdown", (event) => {
+
+      const button = document.getElementById("noButton");
+
+      if (!button) return;
+      if (event.pointerType === "mouse") return;
+
+      if (event.target === button) {
+
+        event.preventDefault();
+        moveNoButton();
+
+      }
+
+    });
 
 
     /* =====================================
