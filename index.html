@@ -874,18 +874,18 @@
 
           else {
 
-            input.addEventListener("focus", () => {
+          input.addEventListener("focus", () => {
 
-              selectedCell = input;
+  selectedCell = input;
 
-              document.querySelectorAll(".cell")
-                .forEach(c => c.classList.remove("selected"));
+  document.querySelectorAll(".cell")
+    .forEach(c => c.classList.remove("selected"));
 
-              cell.classList.add("selected");
+  cell.classList.add("selected");
 
-            });
+  input.select();
 
-
+});
             input.addEventListener("input", () => {
 
               const value = input.value;
