@@ -604,7 +604,11 @@
 </head>
 
 <body>
-
+  
+<audio id="bgm" loop>
+  <source src="bgm.mp3" type="audio/mpeg">
+</audio>
+  
   <!-- =========================
        STARS
   ========================= -->
@@ -751,6 +755,9 @@
 
     function enterUniverse() {
 
+      const bgm = document.getElementById("bgm");
+bgm.play();
+      
       const scene1 = document.getElementById("scene1");
       const scene2 = document.getElementById("scene2");
 
