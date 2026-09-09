@@ -438,6 +438,27 @@ button {
   }
 }
 
+  #scene3 .letter-continue {
+  margin-top: 16px;
+  padding: 12px 25px;
+  border: 1px solid rgba(255,247,239,.35);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffe3ef, #f4c5db);
+  color: #321a39;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+#scene3 .letter-continue:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255,185,215,.22);
+}
+
 .small-note {
   margin-top: 18px;
   color: rgba(255,245,252,.62);
@@ -476,7 +497,200 @@ button {
     font-size: 14px;
   }
 }
+  
+/* ===== SCENE 4 · LOVE LETTER ===== */
 
+#scene4 {
+  position: relative;
+  z-index: 5;
+  padding: 24px;
+}
+
+#scene4 .letter-card {
+  width: min(820px, 94vw);
+  height: min(86vh, 820px);
+  padding: 34px 28px 28px;
+  border: 1px solid rgba(255,225,244,.28);
+  border-radius: 30px;
+  background: rgba(31, 20, 58, .72);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#scene4 .letter-eyebrow {
+  margin-bottom: 8px;
+  color: #e8c98c;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+#scene4 .letter-title {
+  margin: 0 0 18px;
+  color: #f9dce9;
+  font-family: "Parisienne", cursive;
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: center;
+}
+
+#scene4 .letter-paper {
+  width: 100%;
+  max-width: 700px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 28px 32px;
+  border: 1px solid rgba(255,235,220,.20);
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,248,239,.075),
+      rgba(255,235,244,.035)
+    );
+  box-shadow: inset 0 0 35px rgba(255,220,235,.035);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232,201,140,.55) transparent;
+}
+
+#scene4 .letter-paper::-webkit-scrollbar {
+  width: 6px;
+}
+
+#scene4 .letter-paper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#scene4 .letter-paper::-webkit-scrollbar-thumb {
+  background: rgba(232,201,140,.55);
+  border-radius: 999px;
+}
+
+#scene4 .letter-content {
+  color: rgba(255,247,239,.90);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.85;
+  text-align: left;
+}
+
+#scene4 .letter-content p {
+  margin: 0 0 20px;
+}
+
+#scene4 .letter-content .letter-opening {
+  color: #f9dce9;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+#scene4 .letter-content strong {
+  color: #ffe3ef;
+  font-weight: 600;
+}
+
+#scene4 .letter-content em {
+  color: #f4d9e7;
+}
+
+#scene4 .letter-content blockquote {
+  margin: 28px 10px;
+  padding: 4px 0 4px 22px;
+  border-left: 2px solid rgba(232,201,140,.65);
+  color: #f4dfeb;
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+#scene4 .letter-content .poem-author {
+  margin-top: -10px;
+  text-align: right;
+  color: rgba(255,247,239,.62);
+  font-size: 16px;
+}
+
+#scene4 .letter-end {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,225,244,.16);
+  text-align: center;
+}
+
+#scene4 .letter-end p {
+  margin-bottom: 8px;
+}
+
+#scene4 .letter-signature {
+  color: #f9dce9;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+#scene4 .letter-continue {
+  margin-top: 18px;
+  flex-shrink: 0;
+  padding: 13px 27px;
+  border: 1px solid rgba(255,247,239,.35);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffe3ef, #f4c5db);
+  color: #321a39;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+#scene4 .letter-continue:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255,185,215,.22);
+}
+
+@media (max-width: 600px) {
+  #scene4 {
+    padding: 12px;
+  }
+
+  #scene4 .letter-card {
+    width: 96vw;
+    height: 92vh;
+    padding: 24px 12px 18px;
+    border-radius: 24px;
+  }
+
+  #scene4 .letter-title {
+    font-size: 42px;
+  }
+
+  #scene4 .letter-paper {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  #scene4 .letter-content {
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  #scene4 .letter-content blockquote {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 16px;
+    font-size: 18px;
+  }
+}
+  
 /* ===== SCENE 1 ORIGINAL UI ===== */
 
 #scene1 {
@@ -913,10 +1127,399 @@ button {
     </div>
 
     <div id="roachMessage" class="roach-message"></div>
+
+    <button
+  id="letterButton"
+  class="letter-continue hidden"
+  onclick="goToScene4()"
+>
+  Read my letter ♡
+</button>
+    
     <div class="small-note">♡ Chọn câu trả lời thật lòng nhé.</div>
   </div>
 </section>
+<!-- SCENE 4 -->
+<section id="scene4" class="scene hidden">
 
+  <div class="letter-card">
+
+    <div class="letter-eyebrow">
+      Planet 03 · A Letter From Me
+    </div>
+
+    <h2 class="letter-title">
+      Gửi anh, người em yêu nhất
+    </h2>
+
+    <div class="letter-paper">
+
+      <div class="letter-content">
+
+        <p class="letter-opening">
+          Gửi anh, người em yêu nhất
+        </p>
+
+        <p>
+          Trung Thu này, em muốn tặng anh một món quà nhỏ. Nhưng thật ra,
+          điều em muốn gửi đến anh không chỉ nằm trong món quà ấy. Em đã nghĩ
+          rất lâu không biết phải viết lá thư này như thế nào. Có quá nhiều
+          điều em muốn nói, nhiều đến mức nếu cứ đợi một ngày thật thích hợp,
+          có lẽ em sẽ chẳng bao giờ nói hết được. Vậy nên em mượn dịp Trung Thu
+          này, mượn một đêm trăng, mượn vài trang giấy để nói với anh những điều
+          mà trong những ngày bình thường em vẫn thường giữ lại trong lòng.
+        </p>
+
+        <p>
+          Em muốn nói rằng...
+        </p>
+
+        <p>
+          <strong>Em yêu anh rất nhiều.</strong>
+        </p>
+
+        <p>
+          Bốn năm rồi. Nghe vừa dài vừa ngắn. Dài vì trong bốn năm ấy, chúng ta
+          đã cùng nhau trải qua thật nhiều chuyện. Nhưng cũng ngắn vì đôi khi
+          em vẫn có cảm giác như mới hôm qua thôi, anh còn là một người xa lạ
+          bước vào cuộc sống của em, còn bây giờ anh đã trở thành người mà em
+          quen thuộc đến mức có những điều em chẳng cần nghĩ cũng biết anh sẽ
+          làm gì, sẽ nói gì, sẽ thích gì.
+        </p>
+
+        <p>
+          Từ một người chẳng hề có trong cuộc sống của em, anh dần trở thành
+          người em muốn kể cho nghe mọi chuyện.
+        </p>
+
+        <p>
+          Một món ăn ngon em muốn kể anh.<br>
+          Một chuyện vui em muốn kể anh.<br>
+          Một ngày buồn em muốn tìm anh.<br>
+          Một nơi đẹp em muốn đi cùng anh.<br>
+          Một chuyện nhỏ xíu xảy ra trong ngày cũng đủ để em nghĩ
+          <em>“Không biết kể anh nghe anh có cười không nhỉ?”</em>
+        </p>
+
+        <p>
+          Có lẽ tình yêu của em dành cho anh đã lớn lên từ những điều nhỏ bé
+          như thế. Không phải chỉ trong những ngày đặc biệt. Mà là trong
+          <strong>rất nhiều ngày bình thường có anh.</strong>
+        </p>
+
+        <p>
+          Em yêu những buổi hai đứa đi đâu đó cùng nhau. Yêu những lần mình ăn
+          chung một món, xem chung một bộ phim, nói những chuyện chẳng đâu vào
+          đâu. Yêu cả những lúc chẳng cần đi đâu cả, chỉ cần được nằm cạnh anh,
+          được anh ôm vào lòng, nghe anh thở, nghe anh nói linh tinh, rồi hai
+          đứa cứ thế ở cạnh nhau. Có những lúc em nghĩ, hạnh phúc của em thật ra
+          đơn giản lắm.
+        </p>
+
+        <p>
+          <strong>Chỉ là được ở cạnh người em yêu.</strong>
+        </p>
+
+        <p>
+          Được nhìn thấy anh.<br>
+          Được chạm vào anh.<br>
+          Được ôm anh thật lâu.<br>
+          Được biết rằng hôm nay mình vẫn còn có nhau.
+        </p>
+
+        <p>
+          Vậy thôi mà em đã thấy đủ đầy. Và anh biết không, bốn năm qua anh đã
+          trở thành một phần trong cuộc sống của em theo cách mà đôi khi chính
+          em cũng không nhận ra.
+        </p>
+
+        <p>
+          Anh nằm trong những thói quen của em.<br>
+          Trong những kế hoạch của em.<br>
+          Trong những câu chuyện em kể.<br>
+          Trong những điều em mong chờ.<br>
+          Và trong rất nhiều những dự định mà em từng vô thức nghĩ rằng sau này
+          sẽ có anh ở bên.
+        </p>
+
+        <p>
+          Có lẽ vì vậy mà em càng muốn cảm ơn anh.
+        </p>
+
+        <p>
+          <strong>Cảm ơn anh vì đã đến bên em.</strong>
+        </p>
+
+        <p>
+          Cảm ơn anh vì đã từng chọn em giữa rất nhiều người.<br>
+          Cảm ơn anh vì đã ở bên em suốt bốn năm qua.<br>
+          Cảm ơn những cái ôm, những lần chờ đợi, những buổi hẹn hò, những cuộc
+          gọi, những câu chuyện dài bất tận, những lần anh dỗ dành em, những
+          lúc anh kiên nhẫn với em, và cả những điều nhỏ bé mà có thể anh đã
+          quên từ lâu nhưng em vẫn nhớ.
+        </p>
+
+        <p>
+          Cảm ơn anh vì đã cho em được trải qua một quãng tuổi trẻ có tình yêu.
+          Một quãng tuổi trẻ mà khi nghĩ về, em có thể nhớ rằng mình đã từng
+          yêu một người nhiều đến thế.
+        </p>
+
+        <p>
+          Nhưng anh à…
+        </p>
+
+        <p>
+          Em cũng muốn xin lỗi anh.
+        </p>
+
+        <p>
+          Xin lỗi vì trong bốn năm ấy, em đã có những lúc không biết cách yêu
+          anh thật tốt. Em biết mình đã từng nóng giận. Từng nói những lời
+          không nên nói. Từng làm anh buồn. Từng để những nỗi sợ trong lòng
+          mình lớn đến mức chúng che mất cả những điều tốt đẹp mà anh đang cố
+          gắng dành cho em. Có những lúc em chỉ muốn anh ôm em và nói rằng anh
+          vẫn còn ở đây, nhưng em lại không biết cách nói ra điều đó. Em biến
+          sự bất an thành giận dỗi. Biến nỗi sợ mất anh thành những câu hỏi.
+          Biến mong muốn được yêu thương thành những điều khiến anh cảm thấy
+          mệt mỏi. Nhìn lại, em biết có những lúc anh cũng đã rất mệt.
+        </p>
+
+        <p>
+          Và em xin lỗi vì khi ấy em chỉ nhìn thấy nỗi buồn của mình mà quên
+          mất rằng người đứng trước mặt em cũng có những tổn thương riêng.
+          Xin lỗi anh vì những lần em khiến anh phải chịu đựng một phiên bản
+          rất khó yêu của em. Nếu có thể quay lại, em ước mình đã dịu dàng hơn.
+          Ước gì những lúc sợ hãi, em biết nói:
+          <em>“Em sợ mất anh.”</em>
+          thay vì nổi giận.
+        </p>
+
+        <p>
+          Ước gì những lúc tủi thân, em biết nói:
+          <em>“Anh ôm em một chút được không?”</em>
+          thay vì để anh phải đoán xem mình đã làm gì sai.
+        </p>
+
+        <p>
+          Ước gì em hiểu sớm hơn rằng yêu một người không phải là giữ người ấy
+          thật chặt, mà là để người ấy được là chính mình và vẫn tin rằng hai
+          người có thể tìm về với nhau. Em vẫn đang học cách yêu anh như thế.
+          Và em mong mình sẽ còn có thật nhiều thời gian để học. Em cũng mong
+          anh sẽ kiên nhẫn với em thêm một chút. Không phải để anh phải chịu
+          đựng em mãi mãi, mà để hai đứa có thể cùng nhau trở thành những người
+          yêu nhau tốt hơn. Em muốn mình cùng nhau trưởng thành.
+        </p>
+
+        <p>
+          Cùng nhau sửa những điều chưa tốt.<br>
+          Cùng nhau học cách nói chuyện khi buồn thay vì làm đau nhau.<br>
+          Cùng nhau học cách ôm nhau sau những ngày mệt mỏi.<br>
+          Cùng nhau đi thật nhiều nơi. Ăn thật nhiều món ngon. Xem thật nhiều
+          bộ phim. Có thêm thật nhiều những buổi tối chỉ nằm cạnh nhau chẳng
+          làm gì cả.
+        </p>
+
+        <p>
+          Em muốn chúng ta có thêm rất nhiều những kỷ niệm mà sau này chỉ cần
+          nhớ lại thôi, cả hai đã có thể mỉm cười. Em không cần một tình yêu
+          hoàn hảo. Em cũng không cần chúng ta phải lúc nào cũng vui vẻ hay
+          không bao giờ cãi nhau. Em chỉ mong rằng,
+          <strong>sau tất cả những lần chúng ta bất đồng, cả hai vẫn nhớ rằng
+          mình đang đứng cùng một phía.</strong>
+        </p>
+
+        <p>
+          Rằng người trước mặt mình không phải là kẻ thù. Mà là người mình yêu.
+        </p>
+
+        <p>
+          Là người mà mình đã từng ôm thật chặt.<br>
+          Là người mà mình đã từng chọn.<br>
+          Là người mà mình vẫn muốn cùng đi tiếp.
+        </p>
+
+        <p>
+          Bởi như Xuân Diệu đã từng nói:
+        </p>
+
+        <blockquote>
+          “Làm sao cắt nghĩa được tình yêu!<br>
+          Có nghĩa gì đâu, một buổi chiều<br>
+          Nó chiếm hồn ta bằng nắng nhạt,<br>
+          Bằng mây nhè nhẹ, gió hiu hiu…”
+        </blockquote>
+
+        <p class="poem-author">
+          — Xuân Diệu —
+        </p>
+
+        <p>
+          Em nghĩ tình yêu của em dành cho anh cũng như thế.
+        </p>
+
+        <p>
+          Em chẳng biết phải cắt nghĩa nó từ đâu. Chẳng biết chính xác từ
+          khoảnh khắc nào anh đã trở thành người quan trọng đến vậy. Chẳng biết
+          từ bao giờ một người xa lạ lại có thể trở thành người mà em nhớ đến
+          đầu tiên khi thức dậy, người em muốn tìm đến khi buồn, người em muốn
+          ôm khi mệt, và người em muốn chia sẻ những điều nhỏ nhặt nhất trong
+          cuộc sống. Em chỉ biết rằng, bằng một cách rất tự nhiên, anh đã bước
+          vào trái tim em. Rồi ở đó rất lâu. Rất sâu.
+        </p>
+
+        <p>
+          Và bốn năm sau, anh vẫn là người em yêu. Có lẽ vì thế nên em mới muốn
+          mượn Trung Thu để viết cho anh những lời này. Bởi vì bình thường em
+          hay ngại nói những lời sến súa, mà anh cũng chẳng thích nghe những
+          thứ quá sướt mướt.
+        </p>
+
+        <p>
+          Có những câu em nghĩ rất nhiều nhưng lại chẳng bao giờ nói.<br>
+          Có những lần muốn cảm ơn anh nhưng cuối cùng chỉ nói một câu rất ngắn.<br>
+          Có những lần muốn nói em yêu anh đến thế nào nhưng rồi lại chỉ ôm anh thôi.
+        </p>
+
+        <p>
+          Nên hôm nay em viết.
+        </p>
+
+        <p>
+          Viết thay cho tất cả những lần em đã không nói.
+        </p>
+
+        <p>
+          Em muốn anh biết rằng em biết ơn bốn năm này rất nhiều.
+        </p>
+
+        <p>
+          Biết ơn vì anh đã xuất hiện.<br>
+          Biết ơn vì anh đã yêu em.<br>
+          Biết ơn vì chúng ta đã gặp nhau vào đúng một thời điểm nào đó trong
+          cuộc đời, rồi từ hai người xa lạ trở thành hai người đã cùng nhau đi
+          qua nhiều năm tháng đến như vậy.
+        </p>
+
+        <p>
+          Và em muốn anh biết rằng, dù đôi khi em vụng về, dù có những lúc em
+          làm sai, <strong>tình yêu em dành cho anh chưa bao giờ là điều em xem
+          nhẹ.</strong>
+        </p>
+
+        <p>
+          Anh là người em đã yêu bằng rất nhiều những phần chân thành nhất của
+          mình. Là người khiến em biết nhớ một người là như thế nào. Biết mong
+          chờ một người là như thế nào. Biết cảm giác chỉ cần được ôm một người
+          thôi cũng có thể khiến cả ngày trở nên dịu dàng hơn.
+        </p>
+
+        <p>
+          Em mong anh cũng sẽ nhớ những điều đẹp đẽ ấy. Nhớ rằng đã từng có một
+          cô gái rất yêu anh. Một cô gái có thể đôi khi rất ngốc nghếch, rất
+          nhạy cảm, rất dở hơi, nhưng cũng đã từng đặt vào tình yêu này rất
+          nhiều niềm tin, rất nhiều hy vọng, rất nhiều dịu dàng mà cô ấy có.
+          Và cô gái ấy vẫn muốn được yêu anh.
+        </p>
+
+        <p>
+          Muốn được cùng anh đi tiếp.<br>
+          Muốn được nhìn thấy anh trưởng thành hơn, vui vẻ hơn, hạnh phúc hơn.<br>
+          Và cũng muốn anh nhìn thấy em thay đổi từng chút một, để một ngày nào
+          đó anh có thể nhận ra rằng cô gái từng khiến anh buồn rất nhiều cũng
+          đã học được cách yêu anh dịu dàng hơn.
+        </p>
+
+        <p>
+          Nếu có một điều em muốn xin ở anh trong những năm tháng sau này, thì đó là:
+        </p>
+
+        <p>
+          <strong>Mình đừng ngừng chọn nhau.</strong>
+        </p>
+
+        <p>
+          Mỗi ngày một chút.<br>
+          Những ngày vui thì chọn nhau.<br>
+          Những ngày mệt mỏi cũng cố gắng chọn nhau.<br>
+          Những ngày chẳng hiểu nhau thì chậm lại một chút, nghe nhau thêm một chút.
+        </p>
+
+        <p>
+          Đừng để một vài ngày không vui làm mình quên mất đã có bao nhiêu ngày
+          rất đẹp.
+        </p>
+
+        <p>
+          Em muốn mình cùng nhau đi qua thật nhiều mùa Trung Thu nữa. Không cần
+          phải có những món quà thật lớn. Có khi chỉ cần một chiếc bánh, một
+          đêm trăng, một cái ôm thật lâu và hai đứa vẫn còn ngồi cạnh nhau là
+          đủ rồi.
+        </p>
+
+        <p>
+          Và nếu sau này em lại quên cách nói rằng em yêu anh, thì anh hãy nhớ
+          giúp em rằng:
+        </p>
+
+        <p>
+          <strong>Em yêu anh nhiều hơn những gì em thường nói.</strong>
+        </p>
+
+        <p>
+          Yêu anh trong những điều lớn lao.<br>
+          Yêu anh trong những điều nhỏ xíu.<br>
+          Yêu anh cả trong những ngày bình thường nhất.
+        </p>
+
+        <p>
+          Và cảm ơn anh vì đã trở thành một phần đẹp đẽ đến như vậy trong tuổi
+          trẻ của em.
+        </p>
+
+        <p>
+          <strong>Chúc anh một mùa Trung Thu thật vui.</strong>
+        </p>
+
+        <p>
+          Mong trăng năm nay vẫn dịu dàng.<br>
+          Mong những ngày phía trước của anh thật nhiều niềm vui.<br>
+          Và mong rằng khi mùa trăng lại đến vào năm sau, rồi năm sau nữa,
+          <strong>người đứng bên cạnh anh vẫn là em.</strong>
+        </p>
+
+        <div class="letter-end">
+
+          <p class="letter-signature">
+            Em yêu anh.
+          </p>
+
+          <p>
+            Rất nhiều.
+          </p>
+
+          <p>
+            Và nếu có thể, em muốn được tiếp tục yêu anh thêm thật nhiều năm nữa.
+          </p>
+
+          <p class="letter-signature">
+            - Em, người yêu anh. ♡
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <button class="letter-continue" onclick="goToScene5()">
+      Turn the page ♡
+    </button>
+
+  </div>
+
+</section>
+  
 <!-- ACCESS OVERLAY -->
 <div id="accessOverlay" class="access-overlay hidden">
   <div class="access-box">
@@ -1179,6 +1782,17 @@ function goToScene3() {
   resetNoButton();
 }
 
+  function goToScene4() {
+  document.getElementById("scene3").classList.add("hidden");
+  document.getElementById("scene4").classList.remove("hidden");
+
+  const letterPaper = document.querySelector("#scene4 .letter-paper");
+
+  if (letterPaper) {
+    letterPaper.scrollTop = 0;
+  }
+}
+
 function chooseYes() {
   const message = document.getElementById("roachMessage");
 
@@ -1188,6 +1802,10 @@ function chooseYes() {
   void message.offsetWidth;
 
   message.classList.add("show");
+
+  setTimeout(() => {
+    document.getElementById("letterButton").classList.remove("hidden");
+  }, 850);
 }
   
 /* =========================
