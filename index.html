@@ -951,6 +951,14 @@ bgm.play();
        CHECK INDIVIDUAL CELL
     ===================================== */
 
+    const wrongMessages = [
+  "EO ƠI GÀAAA 🐔",
+  "Anh có chắc anh học giỏi Toán?",
+  "Sai rồi kìa, chồng em ơiii liu liu",
+  "Hmm... em nghĩ anh làm được tốt hơn đó",
+  "Đến số còn tính sai, sao có thể tính được chuyện đôi mình? 😠"
+];
+    
     function checkCell(input, cell) {
 
       const row = Number(input.dataset.row);
@@ -983,10 +991,10 @@ setTimeout(() => {
   buzz.pause();
 }, 600);
         
-        showMessage(
-          "Hmm... hình như ngôi sao này chưa đúng rồi ♡",
-          true
-        );
+  showMessage(
+    wrongMessages[Math.floor(Math.random() * wrongMessages.length)],
+    true
+  );
 
       }
 
