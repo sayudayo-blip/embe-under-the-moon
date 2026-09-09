@@ -608,6 +608,10 @@
 <audio id="bgm" loop>
   <source src="bgm.mp3" type="audio/mpeg">
 </audio>
+
+  <audio id="buzz">
+  <source src="Wrong Buzzer.mp3" type="audio/mpeg">
+</audio>
   
   <!-- =========================
        STARS
@@ -970,6 +974,15 @@ bgm.play();
 
         cell.classList.add("wrong");
 
+const buzz = document.getElementById("buzz");
+
+buzz.currentTime = 1.7;
+buzz.play();
+
+setTimeout(() => {
+  buzz.pause();
+}, 1000);
+        
         showMessage(
           "Hmm... hình như ngôi sao này chưa đúng rồi ♡",
           true
