@@ -980,8 +980,14 @@ bgm.play();
 
       else {
 
+        cell.classList.remove("wrong");
+        void cell.offsetWidth;
         cell.classList.add("wrong");
 
+        if (navigator.vibrate) {
+          navigator.vibrate(200);
+}        
+        
 const buzz = document.getElementById("buzz");
 
 buzz.currentTime = 2;
