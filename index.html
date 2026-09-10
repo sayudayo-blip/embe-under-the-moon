@@ -1644,12 +1644,11 @@ button {
 }
 
 /* ===== KHUNG KẾT ===== */
-
+  
 #scene6 .tarot-final-message {
   position: absolute;
   left: 50%;
-  top: calc(100% + 48px);
-  bottom: auto;
+  top: calc(100% + 8px);
 
   width: min(650px, 90vw);
 
@@ -1661,6 +1660,8 @@ button {
   font-size: 21px;
   line-height: 1.55;
 
+  text-align: center;
+
   transition:
     opacity .8s ease,
     transform .8s ease;
@@ -1670,7 +1671,7 @@ button {
   opacity: 1;
   transform: translate(-50%, 0);
 }
-
+  
 #scene6 .tarot-final-message strong {
   display: block;
   margin-bottom: 6px;
@@ -1777,8 +1778,7 @@ button {
   }
 
 #scene6 .tarot-final-message {
-  top: calc(100% + 38px);
-  bottom: auto;
+  top: calc(100% + 4px);
   font-size: 17px;
 }
 
@@ -2249,6 +2249,36 @@ button {
   font-size: 18px !important;
 }
 
+  #scene7 .final-memory {
+  width: min(430px, 88%);
+  margin: 52px auto 10px;
+}
+
+#scene7 .final-memory img {
+  display: block;
+
+  width: 100%;
+  max-height: 620px;
+
+  object-fit: contain;
+
+  border: 1px solid rgba(232,201,140,.45);
+  border-radius: 24px;
+
+  box-shadow:
+    0 22px 55px rgba(0,0,0,.42),
+    0 0 35px rgba(238,183,210,.12);
+}
+
+#scene7 .final-memory p {
+  margin: 18px auto 0 !important;
+
+  color: rgba(255,247,239,.62) !important;
+  font-size: 17px !important;
+  font-style: italic;
+  line-height: 1.6 !important;
+}
+  
 #scene7 .ending-signature {
   margin-top: 42px;
   padding-top: 28px;
@@ -2295,6 +2325,14 @@ button {
   #scene7 .milktea-question {
     font-size: 23px !important;
   }
+  #scene7 .final-memory {
+  width: min(360px, 88%);
+  margin-top: 42px;
+}
+
+#scene7 .final-memory p {
+  font-size: 16px !important;
+}
 }
   
 </style>
@@ -2981,27 +3019,28 @@ button {
               Dụng cụ hỗ trợ tập Gym
             </div>
 
-            <div class="tarot-message">
-              For the strongest<br>
-              version of you.
-            </div>
+          <div class="tarot-message">
+            For the strongest<br>
+            version of you.
           </div>
 
+          </div>
         </div>
       </div>
+    </div>
 
-<div id="tarotFinalMessage" class="tarot-final-message">
-  <strong>You picked your gift. ♡</strong>
-  Anh cap màn hình gửi cho em để nhận quà vào 3 ngày sau nhé. ♡
+    <div id="tarotFinalMessage" class="tarot-final-message">
+      <strong>You picked your gift. ♡</strong>
+      Anh cap màn hình gửi cho em để nhận quà vào 3 ngày sau nhé. ♡
 
-  <button
-    id="tarotNext"
-    class="tarot-next"
-    onclick="goToScene7()"
-  >
-    Next ♡
-  </button>
-</div>
+      <button
+        id="tarotNext"
+        class="tarot-next"
+        onclick="goToScene7()"
+      >
+        Next ♡
+      </button>
+    </div>
 
   </div>
 
@@ -3055,20 +3094,19 @@ button {
         đều được em làm bằng rất nhiều tình yêu dành cho anh.
       </p>
 
-      <div class="coding-memory">
+    <div class="coding-memory">
 
-        <img
-          src="coding.png"
-          alt="Em ngồi trước máy tính code món quà này"
-        >
+  <img
+    src="coding.png"
+    alt="Em ngồi trước máy tính code món quà này"
+  >
 
-        <p class="coding-caption">
-          Chân dung người đã ngồi trước máy tính
-          code bức thư này cho anh suốt
-          <strong>3 đêm liền.</strong>
-        </p>
+  <p class="coding-caption">
+    <strong>Hơn 4000 dòng code, 18 giờ ngồi nghiên cứu</strong>
+    vì em không phải coder hic. 🥺
+  </p>
 
-      </div>
+</div>
 
       <p class="milktea-question">
         Nhìn cô ấy cũng đáng thương nhỉ...
@@ -3085,6 +3123,19 @@ button {
         vì đã lén xây cả một vũ trụ bé xíu cho anh. ♡
       </p>
 
+      <div class="final-memory">
+
+  <img
+    src="final.jpg"
+    alt="Cô gái đã làm nên vũ trụ nhỏ này"
+  >
+
+  <p>
+    Và đây là cô gái đã ngồi làm tất cả những thứ này cho anh. ♡
+  </p>
+
+</div>
+      
       <div class="ending-signature">
         <span>Made with love,</span>
         <strong>by the girl who loves you. ♡</strong>
