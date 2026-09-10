@@ -1648,7 +1648,8 @@ button {
 #scene6 .tarot-final-message {
   position: absolute;
   left: 50%;
-  bottom: 5px;
+  top: calc(100% + 48px);
+  bottom: auto;
 
   width: min(650px, 90vw);
 
@@ -1731,10 +1732,11 @@ button {
     height: 310px;
   }
 
-  #scene6 .tarot-final-message {
-    bottom: 0;
-    font-size: 17px;
-  }
+#scene6 .tarot-final-message {
+  top: calc(100% + 38px);
+  bottom: auto;
+  font-size: 17px;
+}
 
   #scene6 .tarot-final-message strong {
     font-size: 20px;
