@@ -1679,11 +1679,55 @@ button {
   font-weight: 600;
 }
 
+  #scene6 .tarot-next {
+  display: block;
+  margin: 18px auto 0;
+  padding: 11px 27px;
+
+  border: 1px solid rgba(255,247,239,.35);
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #ffe3ef, #f4c5db);
+  color: #321a39;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-weight: 500;
+
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+
+  cursor: pointer;
+
+  transition:
+    opacity .7s ease,
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+#scene6 .tarot-next.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#scene6 .tarot-next:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255,185,215,.22);
+}
+
 @media (max-width: 600px) {
 
   #scene6 {
     padding: 12px;
   }
+  
+  #scene6 .tarot-next {
+  margin-top: 14px;
+  padding: 10px 24px;
+  font-size: 16px;
+}
 
   #scene6 .tarot-title {
     font-size: 46px;
@@ -2054,6 +2098,202 @@ button {
   #scene1 .enter-button {
     font-size: 16px;
     padding: 13px 24px;
+  }
+}
+  /* ===== SCENE 7 · FINAL MESSAGE ===== */
+
+#scene7 {
+  position: relative;
+  z-index: 5;
+
+  height: 100vh;
+  min-height: 100vh;
+
+  padding: 65px 20px 100px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  align-items: flex-start;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232,201,140,.55) transparent;
+}
+
+#scene7::-webkit-scrollbar {
+  width: 7px;
+}
+
+#scene7::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#scene7::-webkit-scrollbar-thumb {
+  background: rgba(232,201,140,.55);
+  border-radius: 999px;
+}
+
+#scene7 .ending-stage {
+  width: min(760px, 94vw);
+  margin: 0 auto;
+  text-align: center;
+}
+
+#scene7 .ending-eyebrow {
+  margin-bottom: 10px;
+
+  color: #e8c98c;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+#scene7 .ending-title {
+  margin: 0 0 35px;
+
+  color: #f9dce9;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(44px, 7vw, 68px);
+  font-weight: 500;
+  line-height: 1.15;
+
+  text-shadow:
+    0 0 20px rgba(238,183,210,.20),
+    0 0 50px rgba(238,183,210,.10);
+}
+
+#scene7 .ending-content {
+  padding: 40px 36px;
+
+  border: 1px solid rgba(255,225,244,.22);
+  border-radius: 28px;
+
+  background: rgba(31,20,58,.58);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.30),
+    inset 0 1px 0 rgba(255,255,255,.07);
+
+  backdrop-filter: blur(12px);
+}
+
+#scene7 .ending-content p {
+  margin: 0 0 24px;
+
+  color: rgba(255,247,239,.88);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+#scene7 .ending-content strong {
+  color: #ffe3ef;
+  font-weight: 600;
+}
+
+#scene7 .ending-highlight {
+  margin-top: 34px !important;
+  margin-bottom: 38px !important;
+
+  color: #f9dce9 !important;
+  font-size: 23px !important;
+  font-weight: 600;
+}
+
+#scene7 .coding-memory {
+  width: min(580px, 100%);
+  margin: 20px auto 45px;
+}
+
+#scene7 .coding-memory img {
+  display: block;
+
+  width: 100%;
+  max-height: 560px;
+
+  object-fit: contain;
+
+  border: 1px solid rgba(232,201,140,.42);
+  border-radius: 22px;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.38),
+    0 0 35px rgba(232,201,140,.08);
+}
+
+#scene7 .coding-caption {
+  margin: 17px auto 0 !important;
+
+  color: rgba(255,247,239,.62) !important;
+  font-size: 17px !important;
+  font-style: italic;
+  line-height: 1.6 !important;
+}
+
+#scene7 .milktea-question {
+  margin-top: 42px !important;
+
+  color: #f9dce9 !important;
+  font-size: 27px !important;
+  font-weight: 600;
+}
+
+#scene7 .milktea-question span {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+#scene7 .ending-last {
+  color: rgba(255,247,239,.72) !important;
+  font-size: 18px !important;
+}
+
+#scene7 .ending-signature {
+  margin-top: 42px;
+  padding-top: 28px;
+
+  border-top: 1px solid rgba(255,225,244,.16);
+
+  color: rgba(255,247,239,.62);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+#scene7 .ending-signature strong {
+  display: block;
+
+  color: #f9dce9;
+  font-size: 22px;
+}
+
+@media (max-width: 600px) {
+
+  #scene7 {
+    padding: 45px 12px 75px;
+  }
+
+  #scene7 .ending-title {
+    font-size: 44px;
+  }
+
+  #scene7 .ending-content {
+    padding: 28px 19px;
+    border-radius: 23px;
+  }
+
+  #scene7 .ending-content p {
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  #scene7 .ending-highlight {
+    font-size: 21px !important;
+  }
+
+  #scene7 .milktea-question {
+    font-size: 23px !important;
   }
 }
   
@@ -2750,9 +2990,104 @@ button {
         </div>
       </div>
 
-      <div id="tarotFinalMessage" class="tarot-final-message">
-        <strong>You picked your gift. ♡</strong>
-        Anh cap màn hình gửi cho em để nhận quà vào 3 ngày sau nhé. ♡
+<div id="tarotFinalMessage" class="tarot-final-message">
+  <strong>You picked your gift. ♡</strong>
+  Anh cap màn hình gửi cho em để nhận quà vào 3 ngày sau nhé. ♡
+
+  <button
+    id="tarotNext"
+    class="tarot-next"
+    onclick="goToScene7()"
+  >
+    Next ♡
+  </button>
+</div>
+
+  </div>
+
+</section>
+
+  <!-- SCENE 7 -->
+<section id="scene7" class="scene hidden">
+
+  <div class="ending-stage">
+
+    <div class="ending-eyebrow">
+      One Last Little Thing
+    </div>
+
+    <h2 class="ending-title">
+      Thank you for coming this far. ♡
+    </h2>
+
+    <div class="ending-content">
+
+      <p>
+        Nếu anh đã đi đến tận đây rồi,
+        thì trước tiên...
+        <strong>cảm ơn anh.</strong>
+      </p>
+
+      <p>
+        Cảm ơn anh vì đã dành thời gian bước qua từng cánh cổng,
+        ngồi giải cái Sudoku em bày ra,
+        trả lời câu hỏi con gián hết sức quan trọng của em,
+        đọc hết lá thư dài ngoằng,
+        xem lại những ngày tháng của chúng ta
+        và cuối cùng còn ngoan ngoãn chọn một món quà nữa. ♡
+      </p>
+
+      <p>
+        Em không biết sau khi xem hết tất cả những thứ này
+        anh sẽ cảm thấy thế nào,
+        nhưng em thật sự hi vọng anh thích món quà nhỏ này.
+      </p>
+
+      <p>
+        Nó có thể không hoàn hảo.
+        Có thể còn vài chỗ hơi ngốc nghếch,
+        vài dòng code hơi vụng về,
+        vài thứ em sửa đi sửa lại đến phát điên...
+      </p>
+
+      <p class="ending-highlight">
+        Nhưng từng chút một trong vũ trụ này
+        đều được em làm bằng rất nhiều tình yêu dành cho anh.
+      </p>
+
+      <div class="coding-memory">
+
+        <img
+          src="coding.png"
+          alt="Em ngồi trước máy tính code món quà này"
+        >
+
+        <p class="coding-caption">
+          Chân dung người đã ngồi trước máy tính
+          code bức thư này cho anh suốt
+          <strong>3 đêm liền.</strong>
+        </p>
+
+      </div>
+
+      <p class="milktea-question">
+        Nhìn cô ấy cũng đáng thương nhỉ...
+        <br>
+        Cô ấy xứng đáng có một cốc trà sữa chứ?
+        <span>🥺🧋</span>
+      </p>
+
+      <p class="ending-last">
+        Hẹ hẹ.
+        <br>
+        Nếu câu trả lời là có,
+        thì em xin phép coi đó là phần thưởng
+        vì đã lén xây cả một vũ trụ bé xíu cho anh. ♡
+      </p>
+
+      <div class="ending-signature">
+        <span>Made with love,</span>
+        <strong>by the girl who loves you. ♡</strong>
       </div>
 
     </div>
@@ -3223,6 +3558,16 @@ function goToScene6() {
 
   startTarot();
 }
+  function goToScene7() {
+  document.getElementById("scene6").classList.add("hidden");
+  document.getElementById("scene7").classList.remove("hidden");
+
+  const scene7 = document.getElementById("scene7");
+
+  if (scene7) {
+    scene7.scrollTop = 0;
+  }
+}
 
 function startTarot() {
   const cards = document.querySelectorAll("#scene6 .tarot-card");
@@ -3360,17 +3705,24 @@ function pickTarot(selectedCard) {
     Hiện lời nhắn cuối.
   */
 
+setTimeout(() => {
+
+  document
+    .getElementById("tarotFinalMessage")
+    .classList.add("show");
+
   setTimeout(() => {
-
     document
-      .getElementById("tarotFinalMessage")
+      .getElementById("tarotNext")
       .classList.add("show");
+  }, 900);
 
-    tarotRevealDone = true;
+  tarotRevealDone = true;
 
-  }, 4700);
+}, 4700);
+
 }
-  
+
 /* =========================
    FLEEING "KHÔNG" BUTTON
 ========================= */
