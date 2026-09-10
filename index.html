@@ -1327,6 +1327,419 @@ button {
   }
 
 }
+
+  /* ===== SCENE 6 · TAROT GIFT ===== */
+
+#scene6 {
+  position: relative;
+  z-index: 5;
+  padding: 24px;
+  text-align: center;
+}
+
+#scene6 .tarot-stage {
+  width: min(900px, 94vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#scene6 .tarot-eyebrow {
+  margin-bottom: 6px;
+  color: #e8c98c;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+#scene6 .tarot-title {
+  margin: 0;
+  color: #f9dce9;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(44px, 7vw, 68px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+#scene6 .tarot-subtitle {
+  margin: 8px 0 20px;
+  color: rgba(255,247,239,.78);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+#scene6 .pick-text {
+  margin: 0 0 20px;
+  color: #f9dce9;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .7s ease;
+}
+
+#scene6 .pick-text.show {
+  opacity: 1;
+}
+
+#scene6 .pick-hint {
+  margin-top: -13px;
+  margin-bottom: 18px;
+  color: rgba(255,247,239,.55);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity .7s ease;
+}
+
+#scene6 .pick-hint.show {
+  opacity: 1;
+}
+
+/* ===== BỘ 3 LÁ ===== */
+
+#scene6 .tarot-deck {
+  position: relative;
+  width: min(650px, 92vw);
+  height: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  perspective: 1200px;
+}
+
+/* ===== MỖI LÁ ===== */
+
+#scene6 .tarot-card {
+  position: relative;
+  width: 190px;
+  height: 330px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition:
+    transform .8s cubic-bezier(.22,1,.36,1),
+    opacity .8s ease,
+    width .8s ease,
+    height .8s ease;
+}
+
+#scene6 .tarot-card.locked {
+  cursor: default;
+}
+
+#scene6 .tarot-card.shuffle {
+  animation: tarotShuffle 1.8s ease-in-out;
+}
+
+@keyframes tarotShuffle {
+
+  0% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+
+  20% {
+    transform: translateX(-80px) rotate(-8deg) scale(1.02);
+  }
+
+  40% {
+    transform: translateX(90px) rotate(9deg) scale(.98);
+  }
+
+  60% {
+    transform: translateX(-65px) rotate(-6deg) scale(1.01);
+  }
+
+  80% {
+    transform: translateX(55px) rotate(5deg) scale(.99);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+
+}
+
+/* ===== MẶT TRƯỚC / MẶT SAU ===== */
+
+#scene6 .tarot-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform .9s cubic-bezier(.22,1,.36,1);
+}
+
+#scene6 .tarot-card.flipped .tarot-inner {
+  transform: rotateY(180deg);
+}
+
+#scene6 .tarot-front,
+#scene6 .tarot-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  border-radius: 18px;
+  border: 1px solid rgba(232,201,140,.62);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.35),
+    0 0 25px rgba(232,201,140,.08);
+}
+
+/* ===== MẶT SAU GIỐNG NHAU ===== */
+
+#scene6 .tarot-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,220,239,.12),
+      transparent 48%
+    ),
+    linear-gradient(
+      145deg,
+      #38224d,
+      #171027 70%
+    );
+
+  overflow: hidden;
+}
+
+#scene6 .tarot-back::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid rgba(232,201,140,.38);
+  border-radius: 12px;
+}
+
+#scene6 .tarot-back::after {
+  content: "☾  ♡  ☾";
+  position: absolute;
+  color: rgba(249,220,233,.72);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  letter-spacing: 8px;
+}
+
+#scene6 .tarot-number {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  color: rgba(232,201,140,.7);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 12px;
+  letter-spacing: .18em;
+}
+
+/* ===== MẶT TRƯỚC ===== */
+
+#scene6 .tarot-front {
+  transform: rotateY(180deg);
+  padding: 25px 18px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255,232,243,.12),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      #34203f,
+      #171027
+    );
+
+  text-align: center;
+}
+
+#scene6 .tarot-symbol {
+  margin-bottom: 18px;
+  color: #e8c98c;
+  font-size: 38px;
+}
+
+#scene6 .tarot-name {
+  margin-bottom: 18px;
+  color: #f9dce9;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  letter-spacing: .12em;
+  font-weight: 600;
+}
+
+#scene6 .tarot-gift {
+  color: #fff8ff;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+#scene6 .tarot-message {
+  margin-top: 12px;
+  color: rgba(255,247,239,.65);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* ===== LÁ ĐƯỢC CHỌN ===== */
+
+#scene6 .tarot-card.selected {
+  z-index: 20;
+}
+
+#scene6 .tarot-card.selected .tarot-inner {
+  transform: rotateY(180deg);
+}
+
+#scene6 .tarot-card.selected.final {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 285px;
+  height: 430px;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+
+  cursor: default;
+}
+
+#scene6 .tarot-card.selected.final .tarot-inner {
+  transform: rotateY(180deg);
+}
+
+#scene6 .tarot-card.other {
+  opacity: 1;
+}
+
+#scene6 .tarot-card.other.collapsing {
+  transform:
+    translateY(115px)
+    scale(.42)
+    rotate(-4deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== KHUNG KẾT ===== */
+
+#scene6 .tarot-final-message {
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+
+  width: min(650px, 90vw);
+
+  transform: translate(-50%, 20px);
+  opacity: 0;
+
+  color: #f9dce9;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  line-height: 1.55;
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+#scene6 .tarot-final-message.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+#scene6 .tarot-final-message strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #ffe3ef;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+
+  #scene6 {
+    padding: 12px;
+  }
+
+  #scene6 .tarot-title {
+    font-size: 46px;
+  }
+
+  #scene6 .tarot-subtitle {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  #scene6 .tarot-deck {
+    width: 100vw;
+    height: 350px;
+    gap: 8px;
+  }
+
+  #scene6 .tarot-card {
+    width: 112px;
+    height: 250px;
+  }
+
+  #scene6 .tarot-front {
+    padding: 15px 9px;
+  }
+
+  #scene6 .tarot-symbol {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  #scene6 .tarot-name {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  #scene6 .tarot-gift {
+    font-size: 16px;
+  }
+
+  #scene6 .tarot-message {
+    font-size: 12px;
+  }
+
+  #scene6 .tarot-card.selected.final {
+    width: 210px;
+    height: 310px;
+  }
+
+  #scene6 .tarot-final-message {
+    bottom: 0;
+    font-size: 17px;
+  }
+
+  #scene6 .tarot-final-message strong {
+    font-size: 20px;
+  }
+}
   
 /* ===== SCENE 1 ORIGINAL UI ===== */
 
@@ -2210,6 +2623,141 @@ button {
   </div>
 
 </section>
+
+  <!-- SCENE 6 -->
+<section id="scene6" class="scene hidden">
+
+  <div class="tarot-stage">
+
+    <div class="tarot-eyebrow">
+      Planet 05 · A Little Fortune
+    </div>
+
+    <h2 class="tarot-title">
+      A little surprise...
+    </h2>
+
+    <p class="tarot-subtitle">
+      Có ba lá bài đang chờ anh.<br>
+      Nhưng chỉ một lá là dành cho anh. ♡
+    </p>
+
+    <div id="pickText" class="pick-text">
+      PICK ONE
+    </div>
+
+    <div id="pickHint" class="pick-hint">
+      Trust your heart, baby. ♡
+    </div>
+
+    <div id="tarotDeck" class="tarot-deck">
+
+      <!-- CARD 1 -->
+      <div
+        class="tarot-card"
+        data-card="1"
+        onclick="pickTarot(this)"
+      >
+        <div class="tarot-inner">
+
+          <div class="tarot-back">
+            <span class="tarot-number">I</span>
+          </div>
+
+          <div class="tarot-front">
+            <div class="tarot-symbol">☀</div>
+
+            <div class="tarot-name">
+              THE SUN
+            </div>
+
+            <div class="tarot-gift">
+              Kem chống nắng
+            </div>
+
+            <div class="tarot-message">
+              A little sunshine<br>
+              for your everyday.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div
+        class="tarot-card"
+        data-card="2"
+        onclick="pickTarot(this)"
+      >
+        <div class="tarot-inner">
+
+          <div class="tarot-back">
+            <span class="tarot-number">II</span>
+          </div>
+
+          <div class="tarot-front">
+            <div class="tarot-symbol">♡</div>
+
+            <div class="tarot-name">
+              THE LOVERS
+            </div>
+
+            <div class="tarot-gift">
+              Một chiếc áo thun
+            </div>
+
+            <div class="tarot-message">
+              Something soft<br>
+              to carry my love.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div
+        class="tarot-card"
+        data-card="3"
+        onclick="pickTarot(this)"
+      >
+        <div class="tarot-inner">
+
+          <div class="tarot-back">
+            <span class="tarot-number">III</span>
+          </div>
+
+          <div class="tarot-front">
+            <div class="tarot-symbol">♜</div>
+
+            <div class="tarot-name">
+              STRENGTH
+            </div>
+
+            <div class="tarot-gift">
+              Dụng cụ hỗ trợ tập Gym
+            </div>
+
+            <div class="tarot-message">
+              For the strongest<br>
+              version of you.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="tarotFinalMessage" class="tarot-final-message">
+        <strong>You picked your gift. ♡</strong>
+        Anh cap màn hình gửi cho em để nhận quà vào 3 ngày sau nhé. ♡
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
   
 <!-- ACCESS OVERLAY -->
 <div id="accessOverlay" class="access-overlay hidden">
@@ -2658,6 +3206,167 @@ function prevMemory() {
     void photo.offsetWidth;
     photo.classList.add("flip-in");
   }, 850);
+}
+
+  /* =========================
+   SCENE 6 · TAROT GIFT
+========================= */
+
+let tarotLocked = false;
+let tarotRevealDone = false;
+
+function goToScene6() {
+  document.getElementById("scene5").classList.add("hidden");
+  document.getElementById("scene6").classList.remove("hidden");
+
+  startTarot();
+}
+
+function startTarot() {
+  const cards = document.querySelectorAll("#scene6 .tarot-card");
+  const pickText = document.getElementById("pickText");
+  const pickHint = document.getElementById("pickHint");
+  const finalMessage = document.getElementById("tarotFinalMessage");
+
+tarotLocked = true;
+tarotRevealDone = false;
+
+  pickText.classList.remove("show");
+  pickHint.classList.remove("show");
+  finalMessage.classList.remove("show");
+
+  cards.forEach(card => {
+    card.classList.remove(
+      "flipped",
+      "selected",
+      "final",
+      "other",
+      "collapsing",
+      "locked",
+      "shuffle"
+    );
+  });
+
+  /*
+    Xào bài.
+    Mỗi lá có delay nhẹ khác nhau để cảm giác
+    giống một bộ bài đang được xào.
+  */
+
+  cards.forEach((card, index) => {
+    card.style.animationDelay = `${index * 0.08}s`;
+
+    setTimeout(() => {
+      card.classList.add("shuffle");
+    }, index * 80);
+  });
+
+  /*
+    Sau khi xào xong mới cho PICK ONE xuất hiện.
+  */
+
+setTimeout(() => {
+  pickText.classList.add("show");
+  pickHint.classList.add("show");
+
+  // Chỉ cho phép chọn bài sau khi xào xong
+  tarotLocked = false;
+}, 2100);
+
+}
+
+function pickTarot(selectedCard) {
+
+  if (tarotLocked) return;
+
+  tarotLocked = true;
+
+  const cards = Array.from(
+    document.querySelectorAll("#scene6 .tarot-card")
+  );
+
+  /*
+    Khóa cả ba lá.
+  */
+
+  cards.forEach(card => {
+    card.classList.add("locked");
+  });
+
+  /*
+    Đánh dấu lá được chọn.
+  */
+
+  selectedCard.classList.add("selected");
+
+  /*
+    Lật lá được chọn trước.
+  */
+
+  setTimeout(() => {
+    selectedCard.classList.add("flipped");
+  }, 150);
+
+  /*
+    Sau đó lật hai lá còn lại lần lượt.
+  */
+
+  const otherCards = cards.filter(
+    card => card !== selectedCard
+  );
+
+  setTimeout(() => {
+    otherCards[0].classList.add("flipped");
+  }, 1200);
+
+  setTimeout(() => {
+    otherCards[1].classList.add("flipped");
+  }, 2300);
+
+  /*
+    Sau khi cả 3 lá đã mở:
+    hai lá không được chọn gom xuống dưới
+    rồi biến mất.
+  */
+
+  setTimeout(() => {
+
+    otherCards.forEach(card => {
+      card.classList.add("other");
+    });
+
+    otherCards[0].classList.add("collapsing");
+
+    setTimeout(() => {
+      otherCards[1].classList.add("collapsing");
+    }, 180);
+
+  }, 3400);
+
+  /*
+    Cuối cùng lá được chọn phóng to
+    thành lá chính diện trang.
+  */
+
+  setTimeout(() => {
+
+    selectedCard.classList.add("final");
+
+  }, 4050);
+
+  /*
+    Hiện lời nhắn cuối.
+  */
+
+  setTimeout(() => {
+
+    document
+      .getElementById("tarotFinalMessage")
+      .classList.add("show");
+
+    tarotRevealDone = true;
+
+  }, 4700);
 }
   
 /* =========================
